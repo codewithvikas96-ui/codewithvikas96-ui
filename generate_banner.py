@@ -197,6 +197,14 @@ def head(y, label, note, accent, t):
     ]
 
 
+def mix(c1, c2, u):
+    """Blend two #rrggbb colours."""
+    p = [int(c1[i:i + 2], 16) for i in (1, 3, 5)]
+    q = [int(c2[i:i + 2], 16) for i in (1, 3, 5)]
+    return "#" + "".join(f"{round(p[k] + (q[k] - p[k]) * u):02X}"
+                         for k in range(3))
+
+
 def plen(pts):
     return sum(math.dist(pts[i], pts[i + 1]) for i in range(len(pts) - 1))
 
@@ -412,135 +420,139 @@ def scene_optimizer(t):
 
 
 def scene_neuron(t):
-    """Scene 3 — a neuron fires.
+    """Scene 3 — a multipolar neuron, drawn the way a biology plate draws one.
 
-    Branching dendritic arbor, an irregular soma with nucleus and nucleolus,
-    an axon hillock, a myelinated axon broken by nodes of Ranvier, and
-    saltatory conduction: the spike jumps node to node instead of sliding.
+    Every limb is a tapered filled ribbon, not a stroke: a centreline offset
+    perpendicular by a width that shrinks toward the tip. Soma, dendrites and
+    axon are painted in two passes — a fattened outline pass, then a fill pass
+    on top — so the whole cell reads as one continuous silhouette with no
+    internal seams where the branches meet the cell body.
     """
     a = t["magenta"]
-    o = head(96, "NEURON.SPIKE", "saltatory conduction", a, t)
-    cyc = 2.8
-    rng = random.Random(5)
-    sx0, sy0 = 172, 246
+    body = mix(t["sub"], a, 0.30)
+    cyc = 3.0
+    rng = random.Random(9)
+    sx0, sy0 = 162, 250
+    o = head(96, "NEURON.SPIKE", "action potential", a, t)
 
-    # ---- dendritic arbor: recursive, tapering, slightly wandering
-    segs, tips = [], []
+    shapes, tips = [], []
 
-    def grow(x, y, ang, ln, w, depth, chain):
+    def ribbon(pts, w0, w1):
+        """Tapered polygon around a centreline."""
+        n, left, right = len(pts), [], []
+        for i, (x, y) in enumerate(pts):
+            if i == 0:
+                dx, dy = pts[1][0] - x, pts[1][1] - y
+            elif i == n - 1:
+                dx, dy = x - pts[-2][0], y - pts[-2][1]
+            else:
+                dx, dy = pts[i + 1][0] - pts[i - 1][0], pts[i + 1][1] - pts[i - 1][1]
+            L = math.hypot(dx, dy) or 1.0
+            nx, ny = -dy / L, dx / L
+            w = (w0 + (w1 - w0) * (i / (n - 1))) / 2
+            left.append((round(x + nx * w, 1), round(y + ny * w, 1)))
+            right.append((round(x - nx * w, 1), round(y - ny * w, 1)))
+        return left + right[::-1]
+
+    def grow(x, y, ang, ln, w0, w1, depth, chain):
         pts, cx, cy, aa = [(round(x, 1), round(y, 1))], x, y, ang
         for _ in range(5):
-            aa += rng.uniform(-0.2, 0.2)
+            aa += rng.uniform(-0.17, 0.17)
             cx += math.cos(aa) * ln / 5
             cy += math.sin(aa) * ln / 5
             pts.append((round(cx, 1), round(cy, 1)))
-        segs.append((pts, round(w, 2)))
+        shapes.append(ribbon(pts, w0, w1))
         chain = chain + pts[1:]
         if depth == 0:
             tips.append(chain)
             return
         for k in (-1, 1):
-            grow(cx, cy, aa + k * rng.uniform(0.34, 0.62),
-                 ln * rng.uniform(0.56, 0.72), w * 0.62, depth - 1, chain)
+            grow(cx, cy, aa + k * rng.uniform(0.36, 0.62),
+                 ln * rng.uniform(0.58, 0.74), w1, w1 * 0.52, depth - 1, chain)
 
-    for ang in (2.02, 2.48, 2.95, 3.42, 3.88):
-        ex, ey = sx0 + math.cos(ang) * 25, sy0 + math.sin(ang) * 23
-        grow(ex, ey, ang, 33, 3.1, 2, [(round(ex, 1), round(ey, 1))])
+    # primary dendrites radiate everywhere except where the axon leaves
+    for ang in (1.55, 1.98, 2.42, 2.90, 3.42, 3.98, 5.42):
+        bx, by = sx0 + math.cos(ang) * 8, sy0 + math.sin(ang) * 8
+        grow(bx, by, ang, 30, 15, 7, 2, [(round(bx, 1), round(by, 1))])
 
-    for pts, w in segs:
-        o.append(f'<polyline points="{poly(pts)}" fill="none" stroke="{t["border"]}" '
-                 f'stroke-width="{w}" stroke-linecap="round" stroke-linejoin="round"/>')
-    for ch in tips:
-        o.append(f'<circle cx="{ch[-1][0]}" cy="{ch[-1][1]}" r="1.8" '
-                 f'fill="{t["border"]}"/>')
+    # soma
+    soma = []
+    for i in range(56):
+        th = i / 56 * 6.28319
+        rr = 3.4 * math.sin(3 * th + 0.6) + 2.2 * math.sin(5 * th + 1.9)
+        soma.append((round(sx0 + math.cos(th) * (30 + rr), 1),
+                     round(sy0 + math.sin(th) * (27 + rr), 1)))
+    shapes.append(soma)
 
-    # ---- axon: dense resample so sheath segments land on true arc length
-    guide = [(198, 250), (234, 257), (270, 271), (306, 289),
-             (342, 305), (378, 317), (412, 325)]
-    seglen = [math.dist(guide[i], guide[i + 1]) for i in range(len(guide) - 1)]
-    total = sum(seglen)
+    # axon
+    guide = [(sx0 + 10, sy0 + 6), (214, 268), (254, 284), (296, 298),
+             (338, 310), (378, 318), (410, 322)]
+    shapes.append(ribbon(guide, 14, 5))
 
-    def at(f):
-        want, acc = f * total, 0.0
-        for i, L in enumerate(seglen):
-            if acc + L >= want or i == len(seglen) - 1:
-                u = (want - acc) / L
-                (x1, y1), (x2, y2) = guide[i], guide[i + 1]
-                return (round(x1 + (x2 - x1) * u, 1), round(y1 + (y2 - y1) * u, 1))
-            acc += L
-        return guide[-1]
-
-    dense = [at(i / 97) for i in range(98)]
-
-    o.append(f'<polygon points="{sx0 + 12},{sy0 - 13} {sx0 + 12},{sy0 + 13} '
-             f'206,253 203,246" fill="{t["border"]}" opacity="0.9"/>')
-    o.append(f'<polyline points="{poly(dense)}" fill="none" stroke="{t["border"]}" '
-             f'stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>')
-
-    nodes = []
-    for k in range(7):
-        i0, i1 = k * 14, k * 14 + 11
-        o.append(f'<polyline points="{poly(dense[i0:i1])}" fill="none" '
-                 f'stroke="{t["border"]}" stroke-width="9.5" stroke-linecap="round" '
-                 f'stroke-linejoin="round" opacity="0.5"/>')
-        if k < 6:
-            nodes.append(dense[i1 + 1])
-
-    tip = dense[-1]
+    # terminal branches, each ending in a bouton
     boutons = []
-    for dx, dy in ((26, -20), (30, 4), (20, 24)):
-        end = (round(tip[0] + dx, 1), round(tip[1] + dy, 1))
-        o.append(f'<polyline points="{poly([tip, end])}" fill="none" '
-                 f'stroke="{t["border"]}" stroke-width="2.2" stroke-linecap="round"/>')
-        boutons.append(end)
+    for ang, ln in ((-0.62, 30), (-0.24, 34), (0.2, 32), (0.62, 26)):
+        ex = 410 + math.cos(ang) * ln
+        ey = 322 + math.sin(ang) * ln
+        shapes.append(ribbon([(410, 322), (410 + math.cos(ang) * ln * 0.55,
+                                           322 + math.sin(ang) * ln * 0.55),
+                              (round(ex, 1), round(ey, 1))], 6, 3))
+        boutons.append((round(ex, 1), round(ey, 1)))
 
-    # ---- signals: dendrites inward, soma depolarises, spike jumps the nodes
+    # ---- pass 1: fattened outline, pass 2: fill on top (hides inner seams)
+    for pg in shapes:
+        o.append(f'<polygon points="{poly(pg)}" fill="{a}" stroke="{a}" '
+                 f'stroke-width="3.4" stroke-linejoin="round"/>')
+    for bx, by in boutons:
+        o.append(f'<circle cx="{bx}" cy="{by}" r="6.4" fill="{a}"/>')
+    for pg in shapes:
+        o.append(f'<polygon points="{poly(pg)}" fill="{body}"/>')
+    for bx, by in boutons:
+        o.append(f'<circle cx="{bx}" cy="{by}" r="4.6" fill="{body}"/>')
+
+    # nucleus
+    o.append(f'<circle cx="{sx0 - 3}" cy="{sy0}" r="10.5" fill="{t["green"]}" '
+             f'opacity="0.9"/>')
+    o.append(f'<circle cx="{sx0 - 3}" cy="{sy0}" r="10.5" fill="none" '
+             f'stroke="{t["green"]}" stroke-width="1.6"/>')
+
+    # ---- signals
     for i, ch in enumerate(tips[::2]):
-        o.append(travel(list(reversed(ch)), a, cyc, round(i * 0.06, 2),
-                        sw=2.6, dash=11))
-
-    blob = []
-    for i in range(48):
-        th = i / 48 * 6.28319
-        rr = 3.2 * math.sin(3 * th + 0.6) + 2.1 * math.sin(5 * th + 1.9)
-        blob.append((round(sx0 + math.cos(th) * (27 + rr), 1),
-                     round(sy0 + math.sin(th) * (25 + rr), 1)))
-    o.append(f'<polygon points="{poly(blob)}" fill="{t["sub"]}" '
-             f'stroke="{t["border"]}" stroke-width="2"/>')
-    o.append(f'<polygon points="{poly(blob)}" fill="{a}" opacity="0">'
-             f'<animate attributeName="opacity" values="0;0.32;0" '
-             f'keyTimes="0;0.42;0.62" dur="{cyc}s" repeatCount="indefinite"/></polygon>')
-    o.append(f'<circle cx="{sx0 - 2}" cy="{sy0 + 1}" r="9.5" fill="none" '
-             f'stroke="{t["dim"]}" stroke-width="1.6"/>')
-    o.append(f'<circle cx="{sx0 - 4}" cy="{sy0 - 1}" r="3" fill="{t["dim"]}" '
-             f'opacity="0.85"/>')
-
-    jx = ";".join(str(p[0]) for p in [dense[0]] + nodes + [tip])
-    jy = ";".join(str(p[1]) for p in [dense[0]] + nodes + [tip])
-    beg = round(cyc * 0.42, 2)
-    o.append(f'<circle r="5" fill="{a}" cx="{dense[0][0]}" cy="{dense[0][1]}" '
-             f'opacity="0">'
-             f'<animate attributeName="cx" values="{jx}" dur="{cyc}s" '
-             f'calcMode="discrete" begin="{beg}s" repeatCount="indefinite"/>'
-             f'<animate attributeName="cy" values="{jy}" dur="{cyc}s" '
-             f'calcMode="discrete" begin="{beg}s" repeatCount="indefinite"/>'
-             f'<animate attributeName="opacity" values="0;1;1;0" '
-             f'keyTimes="0;0.02;0.9;1" dur="{cyc}s" begin="{beg}s" '
-             f'repeatCount="indefinite"/></circle>')
+        o.append(travel(list(reversed(ch)), a, cyc, round(i * 0.05, 2),
+                        sw=2.8, dash=12))
+    o.append(f'<polygon points="{poly(soma)}" fill="{a}" opacity="0">'
+             f'<animate attributeName="opacity" values="0;0.5;0" '
+             f'keyTimes="0;0.44;0.62" dur="{cyc}s" repeatCount="indefinite"/></polygon>')
+    o.append(f'<circle cx="{sx0 - 3}" cy="{sy0}" r="10.5" fill="{t["value"]}" '
+             f'opacity="0"><animate attributeName="opacity" values="0;0.55;0" '
+             f'keyTimes="0;0.45;0.63" dur="{cyc}s" repeatCount="indefinite"/></circle>')
+    o.append(travel(guide, a, cyc, round(cyc * 0.46, 2), sw=4, dash=22))
 
     for i, (bx, by) in enumerate(boutons):
-        o.append(f'<circle cx="{bx}" cy="{by}" r="5" fill="{t["sub"]}" '
-                 f'stroke="{t["border"]}" stroke-width="1.6"/>')
-        o.append(f'<circle cx="{bx}" cy="{by}" r="5" fill="{a}" opacity="0">'
+        o.append(f'<circle cx="{bx}" cy="{by}" r="6.4" fill="{a}" opacity="0">'
                  f'<animate attributeName="opacity" values="0;1;0" '
-                 f'keyTimes="0;0.88;1" dur="{cyc}s" begin="{round(i * 0.05, 2)}s" '
+                 f'keyTimes="0;0.9;1" dur="{cyc}s" begin="{round(i * 0.04, 2)}s" '
                  f'repeatCount="indefinite"/></circle>')
 
-    o.append(text(60, 376, "dendrites", t["dim"], size=9.5))
-    o.append(text(sx0, 296, "soma", t["dim"], size=9.5, anchor="middle"))
-    o.append(text(236, 294, "myelin sheath", t["dim"], size=9.5))
-    o.append(text(354, 286, "nodes of Ranvier", t["dim"], size=9.5, anchor="middle"))
-    o.append(text(IX1, 368, "axon terminals", t["dim"], size=9.5, anchor="end"))
+    # synapse highlight, like the dashed call-out on a textbook plate
+    o.append(f'<circle cx="428" cy="336" r="17" fill="none" stroke="{t["cyan"]}" '
+             f'stroke-width="1.3" stroke-dasharray="4 4" opacity="0.35">'
+             f'<animate attributeName="opacity" values="0.35;0.95;0.35" '
+             f'dur="{cyc}s" begin="{round(cyc * 0.88, 2)}s" '
+             f'repeatCount="indefinite"/></circle>')
+
+    # ---- labels with leader lines
+    for lx, ly, anchor, label, tx, ty in (
+        (60, 150, "start", "dendrites", 96, 186),
+        (196, 136, "start", "soma", 176, 220),
+        (60, 348, "start", "nucleus", 150, 258),
+        (300, 252, "middle", "axon", 300, 290),
+        (IX1, 186, "end", "axon terminals", 420, 300),
+        (IX1, 384, "end", "synapse", 436, 350),
+    ):
+        o.append(text(lx, ly, label, t["dim"], size=9.5, anchor=anchor))
+        hx = lx + (18 if anchor == "start" else -18 if anchor == "end" else 0)
+        o.append(line(hx, ly + 5, tx, ty, t["dim"], 0.9, op=0.55))
 
     o += head(420, "SPIKE.TRAIN", "28 ms window", a, t)
     base, x = 542, IX0 + 4
@@ -575,10 +587,6 @@ def scene_particles(t):
         return "u" if (py <= 12.2 and px <= 18.2) or (px <= 12.2 and py <= 18.2) \
             else "l"
 
-    def mix(c1, c2, u):
-        p = [int(c1[i:i + 2], 16) for i in (1, 3, 5)]
-        q = [int(c2[i:i + 2], 16) for i in (1, 3, 5)]
-        return "#" + "".join(f"{round(p[k] + (q[k] - p[k]) * u):02X}" for k in range(3))
 
     cx0, cy0, s, step = 250, 282, 10.6, 0.8
     rng = random.Random(11)
