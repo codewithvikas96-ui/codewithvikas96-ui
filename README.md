@@ -14,15 +14,15 @@
 <div align="center">
 
 <a href="https://www.linkedin.com/in/vikas-vishwakarma-62959a387/">
-  <img src="https://img.shields.io/badge/LinkedIn-0B0D11?style=for-the-badge&logo=linkedin&logoColor=6C8CC7&labelColor=0B0D11" alt="LinkedIn" />
+  <img src="https://img.shields.io/badge/LinkedIn-06080C?style=for-the-badge&logo=linkedin&logoColor=2BD3E8&labelColor=06080C" alt="LinkedIn" />
 </a>
 &nbsp;
 <a href="mailto:vikas221018@gmail.com">
-  <img src="https://img.shields.io/badge/Email-0B0D11?style=for-the-badge&logo=gmail&logoColor=E8A33D&labelColor=0B0D11" alt="Email" />
+  <img src="https://img.shields.io/badge/Email-06080C?style=for-the-badge&logo=gmail&logoColor=3BE08A&labelColor=06080C" alt="Email" />
 </a>
 &nbsp;
 <a href="https://github.com/codewithvikas96-ui?tab=repositories">
-  <img src="https://img.shields.io/badge/Repositories-0B0D11?style=for-the-badge&logo=github&logoColor=8FB573&labelColor=0B0D11" alt="Repositories" />
+  <img src="https://img.shields.io/badge/Repositories-06080C?style=for-the-badge&logo=github&logoColor=FF3D8A&labelColor=06080C" alt="Repositories" />
 </a>
 
 </div>
@@ -250,7 +250,7 @@ background with model work.
 ## <samp>04 · $ cat ROADMAP.yml</samp>
 
 ```mermaid
-%%{init: {'theme':'base','themeVariables':{'primaryColor':'#12151C','primaryTextColor':'#E9ECF1','primaryBorderColor':'#242A35','lineColor':'#5A6372','fontFamily':'ui-monospace, monospace','fontSize':'13px'}}}%%
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#0B0F14','primaryTextColor':'#E6EDF3','primaryBorderColor':'#1B2430','lineColor':'#4E5A68','fontFamily':'ui-monospace, monospace','fontSize':'13px'}}}%%
 flowchart TD
     A["Python + Mathematics"] --> B["Data Science"]
     B --> C["Machine Learning"]
@@ -260,9 +260,9 @@ flowchart TD
     F --> G["AI Agents"]
     G --> H["Production AI Systems"]
 
-    classDef done   fill:#12151C,stroke:#8FB573,stroke-width:1.5px,color:#A8C98E;
-    classDef active fill:#12151C,stroke:#E8A33D,stroke-width:1.5px,color:#E8A33D;
-    classDef queued fill:#12151C,stroke:#242A35,stroke-width:1.5px,color:#8B94A3;
+    classDef done   fill:#0B0F14,stroke:#3BE08A,stroke-width:1.5px,color:#3BE08A;
+    classDef active fill:#0B0F14,stroke:#E8A33D,stroke-width:1.5px,color:#E8A33D;
+    classDef queued fill:#0B0F14,stroke:#1B2430,stroke-width:1.5px,color:#7E8A99;
 
     class A,B,C done;
     class D,E active;
@@ -367,8 +367,8 @@ flowchart TD
 
 <div align="center">
 
-<img width="49%" src="https://github-readme-stats-sage-beta.vercel.app/api?username=codewithvikas96-ui&show_icons=true&count_private=true&include_all_commits=true&hide_rank=true&hide_border=true&title_color=E8A33D&icon_color=6C8CC7&text_color=8B94A3&bg_color=0B0D11" alt="GitHub stats" />
-<img width="49%" src="https://github-readme-stats-sage-beta.vercel.app/api/top-langs/?username=codewithvikas96-ui&layout=compact&langs_count=8&hide_border=true&title_color=E8A33D&text_color=8B94A3&bg_color=0B0D11" alt="Top languages" />
+<img width="49%" src="https://github-readme-stats-sage-beta.vercel.app/api?username=codewithvikas96-ui&show_icons=true&count_private=true&include_all_commits=true&hide_rank=true&hide_border=true&title_color=3BE08A&icon_color=2BD3E8&text_color=7E8A99&bg_color=0B0F14" alt="GitHub stats" />
+<img width="49%" src="https://github-readme-stats-sage-beta.vercel.app/api/top-langs/?username=codewithvikas96-ui&layout=compact&langs_count=8&hide_border=true&title_color=3BE08A&text_color=7E8A99&bg_color=0B0F14" alt="Top languages" />
 
 <br/><br/>
 
@@ -410,11 +410,11 @@ flowchart TD
 <br/>
 
 <a href="mailto:vikas221018@gmail.com">
-  <img src="https://img.shields.io/badge/reach_out-0B0D11?style=for-the-badge&logo=gmail&logoColor=E8A33D&labelColor=0B0D11" alt="Email" />
+  <img src="https://img.shields.io/badge/reach_out-06080C?style=for-the-badge&logo=gmail&logoColor=3BE08A&labelColor=06080C" alt="Email" />
 </a>
 &nbsp;
 <a href="https://www.linkedin.com/in/vikas-vishwakarma-62959a387/">
-  <img src="https://img.shields.io/badge/connect-0B0D11?style=for-the-badge&logo=linkedin&logoColor=6C8CC7&labelColor=0B0D11" alt="LinkedIn" />
+  <img src="https://img.shields.io/badge/connect-06080C?style=for-the-badge&logo=linkedin&logoColor=2BD3E8&labelColor=06080C" alt="LinkedIn" />
 </a>
 
 <br/><br/>
