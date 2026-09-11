@@ -1,590 +1,436 @@
-<!--
-==========================================================
-  BEFORE YOU COMMIT — replace every placeholder below:
-    [YOUR NAME]        -> your display name
-    <github-username>  -> your GitHub username (appears in stats URLs)
-    <linkedin-handle>  -> your LinkedIn vanity URL
-    you@example.com    -> your contact email
-    <repo>             -> the repository name for each project
-    [YOUR CITY], [IN]  -> location line (or delete that row)
-  File must be named README.md inside a repo named exactly
-  like your GitHub username.
-==========================================================
--->
+<!--=====================================================================
+  PROFILE README — terminal / dark-console aesthetic
+  Replace every `your-username`, `your-handle` and `you@example.com`
+  placeholder before publishing.
+======================================================================-->
 
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=21&pause=1200&color=00FF9C&center=true&vCenter=true&width=620&height=44&lines=%24+.%2Fscan_profile;DATA+-%3E+ML+-%3E+AI+-%3E+ENGINEERING;STATUS%3A+BUILDING" alt="DATA -> ML -> AI -> ENGINEERING" />
+# VIKAS VISHWAKARMA
 
-<samp><b>DATA</b> &nbsp;·&nbsp; <b>MACHINE LEARNING</b> &nbsp;·&nbsp; <b>AI SYSTEMS</b> &nbsp;·&nbsp; <b>SOFTWARE ENGINEERING</b></samp>
+**<samp>Python · Data Science · Machine Learning · AI Engineering (in progress)</samp>**
+
+<samp>Turning datasets into decisions — and models into things people can actually use.</samp>
 
 <br/>
 
-<a href="https://github.com/<github-username>"><kbd> &nbsp; GITHUB &nbsp; </kbd></a>
-<a href="https://linkedin.com/in/<linkedin-handle>"><kbd> &nbsp; LINKEDIN &nbsp; </kbd></a>
-<a href="mailto:you@example.com"><kbd> &nbsp; EMAIL &nbsp; </kbd></a>
-<a href="#-project-command-center"><kbd> &nbsp; PROJECTS &nbsp; </kbd></a>
+[![GitHub](https://img.shields.io/badge/GitHub-0D1117?style=flat-square&logo=github&logoColor=C9D1D9)](https://github.com/your-username)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0D1117?style=flat-square&logo=linkedin&logoColor=C9D1D9)](https://www.linkedin.com/in/vikas-vishwakarma-62959a387/)
+[![Email](https://img.shields.io/badge/Email-0D1117?style=flat-square&logo=gmail&logoColor=C9D1D9)](mailto:vikas221018@gmail.com)
 
 </div>
 
 ---
 
-## <samp>`00` &nbsp;IDENTITY SCAN</samp>
+## <samp>01 · $ whoami</samp>
 
-```bash
-$ ./scan_profile --format=table
+```console
+┌──[ vikas@github ]──[ ~/profile ]
+└─$ whoami
 
-  ┌──────────────────────────────────────────────────┐
-  │  SYSTEM // DEVELOPER PROFILE                     │
-  ├──────────────────────────────────────────────────┤
-  │  DATA  ->  ML  ->  AI  ->  ENGINEERING           │
-  │  MODE  :  LEARN -> BUILD -> BREAK -> SHIP        │
-  │  STATE :  ● BUILDING                             │
-  └──────────────────────────────────────────────────┘
-```
-
-```yaml
-developer        : "[YOUR NAME]"
-role             : "Aspiring AI / ML Engineer"
-primary_language : "Python"
-also_writes      : [ "C", "C++", "Java", "TypeScript" ]
-current_focus    : "Deep Learning · NLP · Generative AI · AI Agents"
-also_builds      : "Full-stack web + mobile applications"
-location         : "[YOUR CITY], [IN]"
-status           : "open to internships & collaboration"
-```
-
-<div align="center">
-<table>
-<tr>
-<td align="center"><samp><b>GITHUB</b></samp></td>
-<td align="center"><samp><b>LINKEDIN</b></samp></td>
-<td align="center"><samp><b>CONTACT</b></samp></td>
-</tr>
-<tr>
-<td align="center"><samp><a href="https://github.com/<github-username>">@&lt;github-username&gt;</a></samp></td>
-<td align="center"><samp><a href="https://linkedin.com/in/<linkedin-handle>">/in/&lt;linkedin-handle&gt;</a></samp></td>
-<td align="center"><samp><a href="mailto:you@example.com">you@example.com</a></samp></td>
-</tr>
-</table>
-</div>
-
----
-
-## <samp>`01` &nbsp;WHO I AM</samp>
-
-I started in software development — writing programs, breaking them, and rebuilding them until
-they behaved. That habit pulled me toward **data**: first analysis and visualization, then
-statistics, then **machine learning**, where a wrong assumption shows up as a bad metric instead
-of a compiler error.
-
-Right now I'm moving up the stack toward **AI engineering** — deep learning, NLP, generative
-models, and agent-based systems — while keeping one foot in **application engineering**, because
-a model that never leaves a notebook isn't a system.
-
-My method is simple and unglamorous: read the theory, implement it from scratch once, then build
-something real with it. I keep the experiments that failed, because the confusion matrix I
-misread taught me more than the tutorial I followed correctly.
-
-```text
-  not "passionate about technology"
-  -> curious about why things break, and stubborn about fixing them
+  name        : Vikas
+  role        : Developer moving into Data Science / ML
+  focus       : Python · EDA · Classical ML · heading into Deep Learning
+  builds      : notebooks that answer questions,
+                apps that survive real users
+  timezone    : IST (UTC+5:30)
+  open_to     : Data Science / ML internships · collaboration
 ```
 
 ---
 
-## <samp>`02` &nbsp;CURRENT MISSION</samp>
+## <samp>02 · $ cat about.md</samp>
 
-```yaml
-# status legend:  [✓] COMPLETED   [→] IN PROGRESS   [•] NEXT   [~] EXPLORING
+I started from general software development — C, Java, full-stack web, mobile —
+and I'm now deliberately moving that foundation toward **Data Science, Machine
+Learning and AI engineering**.
 
-FOUNDATION
-  [✓] Programming Fundamentals ............ COMPLETED
-  [✓] Mathematics for ML .................. COMPLETED
-  [✓] Data Analysis & Visualization ....... COMPLETED
-  [✓] Machine Learning (classical) ........ COMPLETED
+My approach is simple: every concept I study has to end up inside something that
+runs. Regression became an insurance-cost predictor. Classification became a
+loan-approval model and a revenue-intent classifier. EDA became an interactive
+IPL analytics dashboard.
 
-ACTIVE TRACK
-  [→] Deep Learning ....................... IN PROGRESS
-  [→] Natural Language Processing ......... IN PROGRESS
-  [→] Model Deployment .................... IN PROGRESS
-
-QUEUED
-  [•] Generative AI & LLM Applications .... NEXT
-  [•] AI Agents & Tool Use ................ NEXT
-  [~] Production AI Systems / MLOps ....... EXPLORING
-```
-
-> <samp>No percentages here on purpose. A skill is either something I've shipped with, something I'm actively building with, or something I haven't earned yet.</samp>
+I'm comfortable with Python and the classical ML stack. Deep Learning, NLP and
+AI agents are where I'm actively learning — and I mark them that way rather than
+pretending otherwise.
 
 ---
 
-## <samp>`03` &nbsp;LEARNING ARCHITECTURE</samp>
+## <samp>03 · $ systemctl status skills</samp>
 
-```text
-   ┌─────────────────────────────┐
-   │ 01 · PYTHON             [✓] │   language + tooling
-   └──────────────┬──────────────┘
-                  ▼
-   ┌─────────────────────────────┐
-   │ 02 · DATA SCIENCE       [✓] │   cleaning · EDA · statistics
-   └──────────────┬──────────────┘
-                  ▼
-   ┌─────────────────────────────┐
-   │ 03 · MACHINE LEARNING   [✓] │   supervised · unsupervised
-   └──────────────┬──────────────┘
-                  ▼
-   ┌─────────────────────────────┐
-   │ 04 · DEEP LEARNING      [→] │   neural nets · optimization
-   └──────────────┬──────────────┘
-                  ▼
-   ┌─────────────────────────────┐
-   │ 05 · NLP                [→] │   text · embeddings · transformers
-   └──────────────┬──────────────┘
-                  ▼
-   ┌─────────────────────────────┐
-   │ 06 · GENERATIVE AI      [•] │   LLM applications · RAG
-   └──────────────┬──────────────┘
-                  ▼
-   ┌─────────────────────────────┐
-   │ 07 · AI AGENTS          [•] │   planning · tools · memory
-   └──────────────┬──────────────┘
-                  ▼
-   ┌─────────────────────────────┐
-   │ 08 · AI SYSTEMS         [~] │   serving · monitoring · scale
-   └─────────────────────────────┘
+```diff
+@@ SYSTEM STATUS ── capability report @@
 
-   ══════════════════════════════════════════════════
-   parallel track : SOFTWARE ENGINEERING
-   backend · databases · APIs · mobile · deployment
-   ══════════════════════════════════════════════════
++ [ ONLINE  ]  Python                      core language, daily driver
++ [ ONLINE  ]  Mathematics & Statistics    linear algebra · probability · inference
++ [ ONLINE  ]  Data Analysis / EDA         NumPy · Pandas · Matplotlib · Seaborn
++ [ ONLINE  ]  Classical Machine Learning  scikit-learn · boosting · clustering
++ [ ONLINE  ]  Software Engineering        full-stack web · mobile · databases
+
+! [ LOADING ]  Deep Learning               neural nets · backprop · architectures
+! [ LOADING ]  Natural Language Processing text pipelines · embeddings
+
+  [ QUEUED  ]  Generative AI               LLM app patterns · RAG
+  [ QUEUED  ]  AI Agents                   tool use · orchestration
+  [ QUEUED  ]  Production AI Systems       serving · monitoring · MLOps
+
+  legend: + proven in projects   ! actively learning   · queued next
 ```
 
 ---
 
-## <samp>`04` &nbsp;SYSTEM MODULES // TECH STACK</samp>
+## <samp>04 · $ cat mission/current.target</samp>
 
-```ini
-; ─────────────────────────────────────────────────────────────
-;  CORE      = daily driver
-;  WORKING   = I have built and shipped something with it
-;  LEARNING  = actively studying, not yet production-tested
-;  EXPLORING = early reading / first experiments
-; ─────────────────────────────────────────────────────────────
+```console
+┌─ TRAJECTORY ─────────────────────────────────────┐
+│                                                  │
+│   Developer                        [ current  ]  │
+│       ↓                                          │
+│   Data Scientist                   [ in-flight]  │
+│       ↓                                          │
+│   ML Engineer                      [ next     ]  │
+│       ↓                                          │
+│   AI Engineer                      [ target   ]  │
+│                                                  │
+└──────────────────────────────────────────────────┘
 
-[ MODULE_01 // PROGRAMMING ]
-Python                             = CORE
-C / C++                            = WORKING
-Java                               = WORKING
-JavaScript / TypeScript            = WORKING
-
-[ MODULE_02 // DATA ]
-NumPy / Pandas                     = WORKING
-Matplotlib / Seaborn               = WORKING
-Jupyter                            = WORKING
-Data Cleaning / Preprocessing      = WORKING
-Exploratory Data Analysis          = WORKING
-Feature Engineering                = WORKING
-Statistical Analysis               = WORKING
-
-[ MODULE_03 // MACHINE LEARNING ]
-Scikit-learn                       = WORKING
-Classification / Regression        = WORKING
-Ensemble Methods                   = WORKING
-Clustering & Dimensionality Red.   = WORKING
-Anomaly Detection                  = WORKING
-Hyperparameter Tuning              = WORKING
-Model Evaluation                   = WORKING
-; full algorithm inventory -> see ML LAB below
-
-[ MODULE_04 // AI ]
-Deep Learning                      = LEARNING
-Natural Language Processing        = LEARNING
-Generative AI                      = LEARNING
-LLM Applications                   = EXPLORING
-AI Agents                          = EXPLORING
-
-[ MODULE_05 // BACKEND ]
-Node.js / Express.js               = WORKING
-Flask                              = WORKING
-REST API Design                    = WORKING
-Authentication & Authorization     = WORKING
-
-[ MODULE_06 // DATABASE ]
-PostgreSQL / Supabase              = WORKING
-MySQL                              = WORKING
-MongoDB                            = WORKING
-Oracle PL/SQL                      = WORKING
-Schema Design & Normalization      = WORKING
-Row Level Security                 = WORKING
-
-[ MODULE_07 // MOBILE ]
-React Native / Expo                = WORKING
-Expo Router                        = WORKING
-Zustand                            = WORKING
-TypeScript                         = WORKING
-
-[ MODULE_08 // TOOLS ]
-Git / GitHub                       = CORE
-VS Code / Jupyter                  = CORE
-Streamlit                          = WORKING
+note: this is a roadmap, not a résumé.
+      each stage is earned by shipping, not by reading.
 ```
+
+**Currently building toward:** deep-learning fundamentals implemented from
+scratch, then NLP pipelines, then LLM-powered applications that combine my
+full-stack background with model work.
 
 ---
 
-## <samp>`05` &nbsp;ML LAB</samp>
+## <samp>05 · $ cat roadmap.yml</samp>
 
-```text
-$ ls -R ~/lab/algorithms
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#0d1117','primaryTextColor':'#c9d1d9','primaryBorderColor':'#30363d','lineColor':'#484f58','fontFamily':'ui-monospace, monospace','fontSize':'13px'}}}%%
+flowchart TD
+    A["Python + Mathematics"]             --> B["Data Science"]
+    B --> C["Machine Learning"]
+    C --> D["Deep Learning"]
+    D --> E["NLP"]
+    E --> F["Generative AI"]
+    F --> G["AI Agents"]
+    G --> H["Production AI Systems"]
 
-ML LAB — implemented, tuned and evaluated on real datasets
-═══════════════════════════════════════════════════════════
+    classDef done   fill:#0d1117,stroke:#2ea043,stroke-width:1.5px,color:#7ee787;
+    classDef active fill:#0d1117,stroke:#9e6a03,stroke-width:1.5px,color:#e3b341;
+    classDef queued fill:#0d1117,stroke:#30363d,stroke-width:1.5px,color:#8b949e;
 
-├── CLASSIFICATION/
-│   ├── logistic_regression      · used in Loan Approval
-│   ├── k_nearest_neighbors      · used in Loan Approval
-│   ├── gaussian_naive_bayes     · used in Loan Approval
-│   ├── decision_tree            · used in ShopSmart
-│   └── support_vector_machine   · studied + benchmarked
-│
-├── REGRESSION/
-│   ├── linear_regression        · used in Insurance Charges
-│   ├── ridge                    · regularization comparison
-│   ├── lasso                    · feature selection effects
-│   └── elastic_net              · combined penalty tuning
-│
-├── ENSEMBLES/
-│   ├── random_forest            · baseline vs. single tree
-│   ├── xgboost                  · boosting experiments
-│   ├── lightgbm                 · speed / accuracy trade-offs
-│   └── catboost                 · categorical-heavy data
-│
-├── UNSUPERVISED/
-│   ├── k_means                  · segmentation experiments
-│   ├── dbscan                   · density vs. centroid methods
-│   └── pca                      · dimensionality reduction
-│
-├── ANOMALY_DETECTION/
-│   ├── isolation_forest         · outlier isolation
-│   └── local_outlier_factor     · local density deviation
-│
-└── EVALUATION/
-    ├── train_test_split · cross_validation
-    ├── gridsearchcv · hyperparameter tuning
-    ├── accuracy · precision · recall · f1 · roc_auc
-    ├── confusion_matrix · classification_report
-    └── r2 · mae · mse · rmse
-
-NOTE: these are tools I can apply and reason about — not a claim
-      of research-level mastery.
+    class A,B,C done;
+    class D,E active;
+    class F,G,H queued;
 ```
 
----
-
-## <a name="-project-command-center"></a><samp>`06` &nbsp;PROJECT COMMAND CENTER</samp>
-
-<!-- ── 001 ───────────────────────────────────────────── -->
-
-```yaml
-PROJECT : ipl-2022-eda
-DOMAIN  : Data Analysis · Visualization
-PURPOSE : Turn a full IPL 2022 season into readable signal — team form,
-          player impact, venue effects and match-level patterns.
-STACK   : [ Python, Pandas, NumPy, Matplotlib, Seaborn, Streamlit ]
-STATUS  : COMPLETE
-BUILT   :
-  - End-to-end cleaning pipeline: missing values, type coercion,
-    inconsistent naming and duplicate match records.
-  - Extensive EDA across batting, bowling, toss and venue dimensions.
-  - Comparative visual analysis instead of one-off charts.
-  - Streamlit layer so the analysis is explorable, not static.
-LEARNED :
-  - Most of the work is preprocessing; the plot is the last 10%.
-  - A question-driven EDA beats a chart-driven one.
-```
-
-<a href="https://github.com/<github-username>/<repo>"><kbd> &nbsp;▸ VIEW REPOSITORY&nbsp; </kbd></a>
-
-<!-- ── 002 ───────────────────────────────────────────── -->
-
-```yaml
-PROJECT : shopsmart
-DOMAIN  : Machine Learning · Binary Classification
-PURPOSE : Predict whether an online shopping session ends in revenue,
-          from session behaviour and page-interaction signals.
-STACK   : [ Python, Pandas, NumPy, Scikit-learn, Matplotlib ]
-MODEL   : Decision Tree Classifier
-STATUS  : COMPLETE
-BUILT   :
-  - Feature engineering over session duration, page-value and
-    visitor-type signals.
-  - Hyperparameter tuning on depth, split criteria and leaf size.
-  - Evaluation beyond accuracy: precision, recall, F1, confusion matrix.
-LEARNED :
-  - On imbalanced targets, accuracy is a comfortable lie.
-  - Tree depth is a direct dial between underfit and memorization.
-```
-
-<a href="https://github.com/<github-username>/<repo>"><kbd> &nbsp;▸ VIEW REPOSITORY&nbsp; </kbd></a>
-
-<!-- ── 003 ───────────────────────────────────────────── -->
-
-```yaml
-PROJECT : loan-approval-prediction
-DOMAIN  : Machine Learning · Classification
-PURPOSE : Predict loan approval outcomes from applicant financial and
-          demographic attributes.
-STACK   : [ Python, Pandas, NumPy, Scikit-learn, Seaborn ]
-MODELS  : [ Logistic Regression, KNN, Gaussian Naive Bayes ]
-STATUS  : COMPLETE
-BUILT   :
-  - Feature engineering + encoding of categorical applicant data.
-  - Class imbalance handling so the minority outcome stays visible.
-  - Head-to-head model comparison on a common evaluation protocol.
-LEARNED :
-  - Three algorithms, three different failure modes on the same data.
-  - Scaling is not optional once distance-based models enter the room.
-```
-
-<a href="https://github.com/<github-username>/<repo>"><kbd> &nbsp;▸ VIEW REPOSITORY&nbsp; </kbd></a>
-
-<!-- ── 004 ───────────────────────────────────────────── -->
-
-```yaml
-PROJECT : insurance-charges-prediction
-DOMAIN  : Machine Learning · Regression
-PURPOSE : Model medical insurance charges from demographic, lifestyle
-          and health indicators.
-STACK   : [ Python, Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn ]
-MODEL   : Regression (linear + regularized variants)
-STATUS  : COMPLETE
-BUILT   :
-  - Derived features: BMI categories and age-group bucketing.
-  - One-hot encoding for categorical inputs.
-  - Pearson correlation analysis to map feature relationships
-    before modelling.
-  - Residual and error analysis (R², MAE, RMSE).
-LEARNED :
-  - Domain-informed bucketing can outperform raw numeric features.
-  - Correlation tells you where to look; it does not tell you why.
-```
-
-<a href="https://github.com/<github-username>/<repo>"><kbd> &nbsp;▸ VIEW REPOSITORY&nbsp; </kbd></a>
-
-<!-- ── 005 ───────────────────────────────────────────── -->
-
-```yaml
-PROJECT : quickfix-lite
-DOMAIN  : Full-Stack Web Platform
-AWARD   : ★ HACKATHON WINNING PROJECT
-PURPOSE : Connect students with verified service providers through a
-          structured request-and-fulfilment workflow.
-STACK   : [ JavaScript, Node.js, Express.js, REST APIs, Database Layer ]
-STATUS  : SHIPPED
-BUILT   :
-  - Dual-role platform: students raise requests, providers respond.
-  - Authentication and session handling for both roles.
-  - Backend + database architecture designed for the request lifecycle
-    (created -> accepted -> resolved).
-  - Modular application architecture with a clean API boundary
-    between client and server.
-LEARNED :
-  - Under a hackathon clock, architecture decisions compound fast —
-    a clear data model was worth more than extra features.
-  - Shipping something usable beats demoing something impressive.
-```
-
-<a href="https://github.com/<github-username>/<repo>"><kbd> &nbsp;▸ VIEW REPOSITORY&nbsp; </kbd></a>
-
-<!-- ── 006 ───────────────────────────────────────────── -->
-
-```yaml
-PROJECT : hr-management-system
-DOMAIN  : Production-Oriented Mobile Application
-PURPOSE : A role-aware HR platform handling employees, attendance and
-          organizational workflows on mobile.
-STACK   : [ React Native, Expo, Expo Router, TypeScript, Zustand,
-            Supabase, PostgreSQL, Edge Functions ]
-STATUS  : ACTIVE DEVELOPMENT
-ARCHITECTURE :
-  - Role-based access architecture separating admin / manager / employee
-    capabilities at both UI and data layers.
-  - Authentication + authorization enforced server-side, not just in
-    the client.
-  - Row Level Security policies in PostgreSQL so access rules live
-    next to the data.
-  - Normalized relational schema with explicit constraints and
-    foreign-key integrity.
-  - Edge Functions for privileged server-side operations that must not
-    run on the client.
-  - Typed end-to-end with TypeScript; Zustand for predictable state.
-  - File-based navigation via Expo Router.
-LEARNED :
-  - Security you can bypass with a modified client is decoration.
-  - RLS forces you to express permissions as data rules — clarifying
-    and unforgiving at the same time.
-SECURITY_NOTE : no credentials, keys or database URLs are published.
-```
-
-<a href="https://github.com/<github-username>/<repo>"><kbd> &nbsp;▸ VIEW REPOSITORY&nbsp; </kbd></a>
-
----
-
-## <samp>`07` &nbsp;PROCESS MONITOR</samp>
-
-```bash
-$ ps --projects --sort=pid
-
-  PID   PROJECT                      TYPE          STATUS
-  ────  ───────────────────────────  ────────────  ─────────────
-  001   ipl-2022-eda                 data          ● COMPLETE
-  002   shopsmart                    ml/clf        ● COMPLETE
-  003   loan-approval-prediction     ml/clf        ● COMPLETE
-  004   insurance-charges            ml/reg        ● COMPLETE
-  005   quickfix-lite                fullstack     ● SHIPPED ★
-  006   hr-management-system         mobile/db     ◉ ACTIVE
-  007   deep-learning-lab            ai            ◌ QUEUED
-  008   nlp-experiments              ai/nlp        ◌ QUEUED
-  009   llm-agent-sandbox            ai/agents     ◌ QUEUED
-
-  ● done   ◉ running   ◌ scheduled   ★ hackathon winner
-```
-
----
-
-## <samp>`08` &nbsp;BUILD LOG</samp>
-
-```text
-BUILD LOG // development journey (no fake dates, just order)
-────────────────────────────────────────────────────────────
-
-[01]  PROGRAMMING FOUNDATIONS
-      ├─ logic, data structures, multiple languages
-      └─ result: comfort with code as a material
-
-[02]  DATA ANALYSIS
-      ├─ cleaning, EDA, visualization, statistics
-      └─ result: questions before charts
-
-[03]  MACHINE LEARNING
-      ├─ classification, regression, clustering, ensembles
-      └─ result: models I can defend, not just run
-
-[04]  MODEL OPTIMIZATION
-      ├─ tuning, validation, honest evaluation
-      └─ result: distrust of a single accuracy number
-
-[05]  FULL-STACK SYSTEMS
-      ├─ APIs, auth, databases, mobile, deployment
-      └─ result: shipped applications, one hackathon win
-
-[06]  AI APPLICATIONS                            « current »
-      ├─ deep learning, NLP, generative models
-      └─ target: working AI features, not demos
-
-[07]  AI AGENTS                                  « next »
-      └─ target: systems that plan, call tools and recover
-
-[08]  PRODUCTION AI SYSTEMS                      « horizon »
-      └─ target: serving, monitoring, reliability
-```
-
----
-
-## <samp>`09` &nbsp;GITHUB ANALYTICS</samp>
-
-<div align="center">
-
-<img height="165" alt="GitHub statistics" src="https://github-readme-stats.vercel.app/api?username=<github-username>&show_icons=true&hide_border=true&include_all_commits=true&rank_icon=github&bg_color=0D1117&title_color=00FF9C&icon_color=00E5FF&text_color=C9D1D9" />
-<img height="165" alt="Top languages" src="https://github-readme-stats.vercel.app/api/top-langs/?username=<github-username>&layout=compact&langs_count=8&hide_border=true&bg_color=0D1117&title_color=00FF9C&text_color=C9D1D9" />
-
-<br/><br/>
-
-<img alt="Contribution streak" src="https://streak-stats.demolab.com?user=<github-username>&hide_border=true&background=0D1117&stroke=1F2A33&ring=00FF9C&fire=00E5FF&currStreakLabel=00FF9C&sideLabels=C9D1D9&currStreakNum=C9D1D9&sideNums=C9D1D9&dates=8B949E" />
-
-<br/><br/>
-
-<img alt="Contribution activity graph" src="https://github-readme-activity-graph.vercel.app/graph?username=<github-username>&bg_color=0D1117&color=C9D1D9&title_color=00FF9C&line=00FF9C&point=00E5FF&area=true&area_color=00FF9C&hide_border=true" />
-
-</div>
-
-```text
-  metrics are a byproduct of the work, not the work
-```
-
----
-
-## <samp>`10` &nbsp;CURRENTLY BUILDING</samp>
-
-```bash
-$ cat current_task.txt
-```
-
-```yaml
-focus:
-  - Deep Learning        : neural network internals, training dynamics
-  - NLP                  : text representation, embeddings, transformers
-  - Generative AI        : prompt design, retrieval, grounded output
-  - AI Agents            : tool use, planning loops, failure recovery
-  - AI Applications      : turning models into usable interfaces
-
-loop:
-  LEARN    -> read the theory, implement it once from scratch
-  BUILD    -> apply it to a real, messy dataset or product
-  TEST     -> measure honestly, including where it fails
-  DEPLOY   -> make it reachable by someone who isn't me
-  ITERATE  -> keep the version that survived contact with reality
-
-next_commit: "another working system, not another certificate"
-```
-
----
-
-## <samp>`11` &nbsp;ENGINEERING PHILOSOPHY</samp>
-
-<div align="center">
-
-<samp><b>I don't collect technologies. I build with them.</b></samp>
-
-</div>
-
-```text
-   LEARN  →  UNDERSTAND  →  BUILD  →  BREAK  →  DEBUG  →  IMPROVE
-     ↑                                                        │
-     └────────────────────────────────────────────────────────┘
-
-   ─ a tutorial finished is not a skill acquired
-   ─ if I can't explain why it works, I haven't learned it
-   ─ the bug is the lesson; the fix is just the receipt
-   ─ simple and shipped outperforms clever and unfinished
-   ─ measure honestly, especially when the number disappoints
-```
-
----
-
-<div align="center">
-
-```bash
-$ systemctl status developer.service
-
-● developer.service — continuous build process
-     Loaded: loaded (/usr/lib/systemd/dev.service; enabled)
-     Active: active (running)
-      Since: the first program that refused to compile
-   Main PID: 1 (curiosity)
-      Tasks: learning, building, breaking, debugging, shipping
-
-     Status: "building toward AI engineering — one system at a time"
-
-$ exit
-```
-
-<samp>Thanks for scanning. If you're building something in <b>data</b>, <b>ML</b> or <b>AI</b> — the terminal's open.</samp>
+<details>
+<summary><samp>▸ expand phase breakdown</samp></summary>
 
 <br/>
 
-<a href="https://github.com/<github-username>"><kbd> &nbsp;GITHUB&nbsp; </kbd></a>
-<a href="https://linkedin.com/in/<linkedin-handle>"><kbd> &nbsp;LINKEDIN&nbsp; </kbd></a>
-<a href="mailto:you@example.com"><kbd> &nbsp;EMAIL&nbsp; </kbd></a>
+| Phase | Stage | Contents | State |
+|:--|:--|:--|:--|
+| `00` | Foundations | Python, linear algebra, probability, statistics | done |
+| `01` | Data Science | EDA, cleaning, preprocessing, feature engineering, correlation & statistical analysis | done |
+| `02` | Machine Learning | regression, classification, ensembles, clustering, tuning, evaluation | done |
+| `03` | Deep Learning | neural networks, backpropagation, optimization, CNNs | active |
+| `04` | NLP | tokenization, embeddings, sequence models, transformers | active |
+| `05` | Generative AI | prompt engineering, RAG, evaluation of LLM outputs | queued |
+| `06` | AI Agents | tool calling, planning loops, multi-step orchestration | queued |
+| `07` | Production AI | serving, APIs, monitoring, reproducible pipelines | queued |
+
+</details>
+
+---
+
+## <samp>06 · $ ls -R stack/</samp>
+
+### `data/`
+
+| Layer | Stack |
+|:--|:--|
+| **Libraries** | `NumPy` · `Pandas` · `Matplotlib` · `Seaborn` |
+| **Techniques** | Exploratory Data Analysis · Data Cleaning · Data Preprocessing · Feature Engineering |
+| **Analysis** | Statistical Analysis · Correlation Analysis · Distribution & Outlier Study |
+| **Environment** | `Jupyter Notebook` |
+
+### `machine-learning/`
+
+| Family | Models & Methods |
+|:--|:--|
+| **Framework** | `scikit-learn` |
+| **Linear** | Linear Regression · Logistic Regression · `Lasso` · `Ridge` · `ElasticNet` |
+| **Instance / Probabilistic** | K-Nearest Neighbours · Naive Bayes · Support Vector Machines |
+| **Trees & Ensembles** | Decision Trees · Random Forest · `XGBoost` · `LightGBM` · `CatBoost` |
+| **Unsupervised** | K-Means · DBSCAN · PCA |
+| **Anomaly Detection** | Isolation Forest · Local Outlier Factor |
+| **Workflow** | `GridSearchCV` · Hyperparameter Tuning · Cross-Validation · Model Evaluation |
+
+### `ai/` <samp>— in progress</samp>
+
+| Track | Direction |
+|:--|:--|
+| **Deep Learning** | neural network fundamentals, training dynamics, architectures |
+| **NLP** | text preprocessing, embeddings, language model behaviour |
+| **Generative AI** | LLM application patterns, retrieval-augmented generation |
+| **AI Agents** | tool use, reasoning loops, task automation |
+| **Applied AI** | AI-powered full-stack applications, AI-driven automation |
+
+<details>
+<summary><samp>▸ expand software engineering stack</samp></summary>
+
+<br/>
+
+| Category | Technologies |
+|:--|:--|
+| **Programming** | `Python` · `C` · `C++` · `Java` · `JavaScript` · `TypeScript` |
+| **Web** | `HTML` · `CSS` · `AngularJS` |
+| **Backend** | `Node.js` · `Express.js` · `Supabase Edge Functions` |
+| **Database** | `SQL` · `MySQL` · `Oracle PL/SQL` · `PostgreSQL` · `MongoDB` |
+| **Mobile** | `React Native` · `Expo` |
+| **Platform** | `Supabase` — Auth · Row Level Security · Postgres |
+| **Desktop** | `PyQt5` |
+| **Tools** | `Git` · `GitHub` · `Jupyter` |
+
+</details>
+
+---
+
+## <samp>07 · $ ./project_command_center --list</samp>
+
+| # | Project | Domain | Core Stack |
+|:--|:--|:--|:--|
+| `01` | **IPL 2022 Data Analysis** | Data Analysis | `Pandas` `Seaborn` `Streamlit` |
+| `02` | **ShopSmart** | Machine Learning | `scikit-learn` `Decision Tree` |
+| `03` | **Loan Approval Prediction** | Machine Learning | `LogReg` `KNN` `GaussianNB` |
+| `04` | **Insurance Charges Prediction** | Regression | `scikit-learn` `Feature Eng.` |
+| `05` | **QuickFix Lite** | Full-Stack · 🏆 Hackathon | `Web` `Backend` `Database` |
+| `06` | **HR Management App** | Mobile · Production | `React Native` `Supabase` |
+
+<br/>
+
+<details open>
+<summary><samp>▸ 01 — IPL 2022 Data Analysis</samp></summary>
+
+<br/>
+
+> **Purpose** — Turn a full IPL 2022 season into an interactive analytical story
+> instead of a static spreadsheet.
+
+**Stack** `Python` · `Pandas` · `NumPy` · `Matplotlib` · `Seaborn` · `Streamlit`
+
+**What it does**
+- Cleans and reshapes raw match-level data into analysis-ready frames
+- Explores team, venue and player performance through EDA
+- Surfaces the findings in an interactive Streamlit dashboard
+
+**What I learned**
+- How much of "analysis" is actually data cleaning and shape decisions
+- Choosing the right chart for the question instead of the prettiest one
+- Moving a notebook from personal exploration to something others can use
+
+[`→ repository`](https://github.com/your-username/ipl-2022-analysis)
+
+</details>
+
+<details>
+<summary><samp>▸ 02 — ShopSmart</samp></summary>
+
+<br/>
+
+> **Purpose** — Predict whether an online browsing session will generate revenue,
+> using behavioural signals from that session.
+
+**Stack** `Python` · `scikit-learn` · `Decision Tree Classifier` · `Pandas`
+
+**What it does**
+- Engineers features from raw session behaviour (page types, durations, intent signals)
+- Trains and tunes a Decision Tree classifier for purchase-intent prediction
+- Evaluates beyond accuracy, since converting sessions are the minority class
+
+**What I learned**
+- Feature engineering moved the needle more than swapping models did
+- How tree depth trades off between memorising and generalising
+- Hyperparameter tuning as a measured process, not trial and error
+
+[`→ repository`](https://github.com/your-username/shopsmart)
+
+</details>
+
+<details>
+<summary><samp>▸ 03 — Loan Approval Prediction</samp></summary>
+
+<br/>
+
+> **Purpose** — Compare classical classifiers on a realistic credit-decision
+> problem and understand *why* one wins.
+
+**Stack** `Python` · `Logistic Regression` · `KNN` · `Gaussian Naive Bayes` · `scikit-learn`
+
+**What it does**
+- Cleans applicant data and engineers features from income, credit and asset fields
+- Handles class imbalance so the minority outcome isn't ignored
+- Benchmarks three model families side by side on consistent metrics
+
+**What I learned**
+- Accuracy is misleading on imbalanced data — precision, recall and confusion matrices aren't optional
+- Each algorithm's assumptions predict where it will fail
+- Scaling matters enormously for KNN and not at all for Naive Bayes
+
+[`→ repository`](https://github.com/your-username/loan-approval-prediction)
+
+</details>
+
+<details>
+<summary><samp>▸ 04 — Insurance Charges Prediction</samp></summary>
+
+<br/>
+
+> **Purpose** — Model medical insurance costs and identify which applicant
+> attributes actually drive the premium.
+
+**Stack** `Python` · `Regression` · `scikit-learn` · `Pandas` · `Seaborn`
+
+**What it does**
+- Derives BMI categories and age groups from continuous variables
+- One-hot encodes categorical attributes for model consumption
+- Uses Pearson correlation analysis to expose relationships before modelling
+
+**What I learned**
+- Binning continuous variables can encode domain knowledge a raw feature can't
+- Correlation analysis before modelling saves time during it
+- Reading residuals to find where a regression systematically misses
+
+[`→ repository`](https://github.com/your-username/insurance-charges-prediction)
+
+</details>
+
+<details>
+<summary><samp>▸ 05 — QuickFix Lite &nbsp;🏆 hackathon winner</samp></summary>
+
+<br/>
+
+> **Purpose** — Connect students with local service providers through a single
+> full-stack platform. Built and shipped under hackathon time pressure — and won.
+
+**Stack** Full-stack web application · Modern web architecture · Backend & database integration
+
+**What it does**
+- Two-sided platform linking students with service providers
+- Backend and database layer supporting the full request lifecycle
+- Built end-to-end within a hackathon window
+
+**What I learned**
+- Scoping ruthlessly: what ships in the time available vs. what's nice to have
+- Designing a data model early prevents rewrites later
+- Building a two-sided flow forces genuinely different UX decisions per role
+
+[`→ repository`](https://github.com/your-username/quickfix-lite)
+
+</details>
+
+<details>
+<summary><samp>▸ 06 — HR Management Application</samp></summary>
+
+<br/>
+
+> **Purpose** — A production-oriented mobile HR platform with real authentication,
+> role separation and database-level security.
+
+**Stack** `React Native` · `Expo` · `TypeScript` · `Supabase` · `PostgreSQL` · `Edge Functions`
+
+**What it does**
+- Role-based architecture separating employee and administrator capabilities
+- Authentication backed by Row Level Security policies at the database layer
+- Server-side logic via Supabase Edge Functions
+- Typed end to end with TypeScript
+
+**What I learned**
+- Security enforced in the database beats security enforced in the UI
+- Row Level Security changes how you design schemas, not just permissions
+- TypeScript pays for itself the moment the data model grows
+- The distance between "it works on my device" and "it's production-ready"
+
+[`→ repository`](https://github.com/your-username/hr-management-app)
+
+</details>
+
+---
+
+## <samp>08 · $ tail -f ~/logs/build.log</samp>
+
+```console
+[ml     ]  comparing boosting families — XGBoost vs LightGBM vs CatBoost
+[dl     ]  implementing backpropagation by hand before trusting a framework
+[nlp    ]  building text preprocessing pipelines from tokenization upward
+[data   ]  sharpening EDA workflow: profile → clean → engineer → validate
+[eng    ]  keeping notebooks reproducible instead of accidentally stateful
+[next   ]  first end-to-end deep learning project, served behind an API
+```
+
+---
+
+## <samp>09 · $ git log --stat --author=me</samp>
+
+<div align="center">
+
+<img height="165" src="https://github-readme-stats.vercel.app/api?username=your-username&show_icons=true&hide_border=true&bg_color=0D1117&title_color=58A6FF&text_color=C9D1D9&icon_color=58A6FF&include_all_commits=true&count_private=true" alt="GitHub stats" />
+<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=your-username&layout=compact&hide_border=true&bg_color=0D1117&title_color=58A6FF&text_color=C9D1D9&langs_count=8" alt="Top languages" />
+
+<br/><br/>
+
+<img height="165" src="https://streak-stats.demolab.com?user=your-username&hide_border=true&background=0D1117&stroke=30363D&ring=58A6FF&fire=58A6FF&currStreakLabel=58A6FF&sideLabels=C9D1D9&dates=8B949E" alt="Contribution streak" />
+
+</div>
+
+<details>
+<summary><samp>▸ contribution graph</samp></summary>
+
+<br/>
+
+<div align="center">
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=your-username&bg_color=0D1117&color=C9D1D9&line=58A6FF&point=C9D1D9&area=true&hide_border=true" alt="Contribution graph" />
+</div>
+
+</details>
+
+---
+
+## <samp>10 · $ cat PHILOSOPHY.md</samp>
+
+```console
+  A notebook that runs once is a result.
+  A system that runs every day is engineering.
+
+  I don't stop at model.fit(). I want to know why the loss
+  curve bends where it does, what the residuals are hiding,
+  and what breaks the first time a real user touches it.
+
+  Every technique gets the same treatment:
+
+      read the math  →  implement it  →  break it
+                     →  measure it    →  ship something that uses it
+
+  Tools change every year. The habit of taking something
+  apart until it makes sense doesn't.
+```
+
+---
+
+<div align="center">
+
+<samp>**`$ echo "open to Data Science / ML internships and collaboration"`**</samp>
+
+<br/>
+
+[![Email](https://img.shields.io/badge/reach_out-0D1117?style=flat-square&logo=gmail&logoColor=C9D1D9)](mailto:vikas221018@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/connect-0D1117?style=flat-square&logo=linkedin&logoColor=C9D1D9)](https://www.linkedin.com/in/vikas-vishwakarma-62959a387/)
+
+<br/>
+
+<samp>`└─$ exit 0`</samp>
 
 </div>
