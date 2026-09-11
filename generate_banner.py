@@ -87,52 +87,11 @@ THEMES = {
 }
 
 
-# Official Python mark (Simple Icons, 24x24 viewBox). Straight-line path only —
-# no curves — so it flattens to exact polygons and needs no bezier maths.
-PY_LOGO_D = "M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"
+# The real python.org mark: one path per snake, exact curve geometry.
+# Source: Wikimedia "Python-logo-notext.svg" (viewBox 0 0 110 110).
+PY_BLUE_D = "M55.023-0.077c-25.971,0-26.25,10.081-26.25,12.156c0,3.148,0,12.594,0,12.594h26.75v3.781 c0,0-27.852,0-37.375,0c-7.949,0-17.938,4.833-17.938,26.25c0,19.673,7.792,27.281,15.656,27.281c2.335,0,9.344,0,9.344,0 s0-9.765,0-13.125c0-5.491,2.721-15.656,15.406-15.656c15.91,0,19.971,0,26.531,0c3.902,0,14.906-1.696,14.906-14.406 c0-13.452,0-17.89,0-24.219C82.054,11.426,81.515-0.077,55.023-0.077z M40.273,8.392c2.662,0,4.813,2.15,4.813,4.813 c0,2.661-2.151,4.813-4.813,4.813s-4.813-2.151-4.813-4.813C35.46,10.542,37.611,8.392,40.273,8.392z"
 
-
-def logo_subpaths(d=PY_LOGO_D):
-    """Flatten the path into closed polygons."""
-    toks = re.findall(r"[MmLlHhVvZz]|-?\d*\.?\d+(?:[eE][-+]?\d+)?", d)
-    subs, cur, x, y, sx, sy, i, cmd = [], [], 0.0, 0.0, 0.0, 0.0, 0, None
-    def num():
-        nonlocal i
-        v = float(toks[i]); i += 1; return v
-    while i < len(toks):
-        if re.match(r"[A-Za-z]", toks[i]):
-            cmd = toks[i]; i += 1
-            if cmd in "Zz":
-                if cur:
-                    cur.append((sx, sy)); subs.append(cur); cur = []
-                x, y = sx, sy
-                continue
-        if cmd in "Mm":
-            a, b = num(), num()
-            x, y = (a, b) if cmd == "M" else (x + a, y + b)
-            if cur: subs.append(cur)
-            cur = [(x, y)]; sx, sy = x, y
-            cmd = "L" if cmd == "M" else "l"
-        elif cmd in "Ll":
-            a, b = num(), num()
-            x, y = (a, b) if cmd == "L" else (x + a, y + b); cur.append((x, y))
-        elif cmd in "Hh":
-            a = num(); x = a if cmd == "H" else x + a; cur.append((x, y))
-        elif cmd in "Vv":
-            a = num(); y = a if cmd == "V" else y + a; cur.append((x, y))
-    if cur: subs.append(cur)
-    return subs
-
-
-def in_polys(px, py, subs):
-    """Even-odd fill test — the eye holes fall out for free."""
-    c = False
-    for sp in subs:
-        for k in range(len(sp) - 1):
-            x1, y1 = sp[k]; x2, y2 = sp[k + 1]
-            if (y1 > py) != (y2 > py) and px < x1 + (py - y1) / (y2 - y1) * (x2 - x1):
-                c = not c
-    return c
+PY_YELLOW_D = "M55.397,109.923c25.959,0,26.282-10.271,26.282-12.156c0-3.148,0-12.594,0-12.594H54.897v-3.781 c0,0,28.032,0,37.375,0c8.009,0,17.938-4.954,17.938-26.25c0-23.322-10.538-27.281-15.656-27.281c-2.336,0-9.344,0-9.344,0 s0,10.216,0,13.125c0,5.491-2.631,15.656-15.406,15.656c-15.91,0-19.476,0-26.532,0c-3.892,0-14.906,1.896-14.906,14.406 c0,14.475,0,18.265,0,24.219C28.366,100.497,31.562,109.923,55.397,109.923z M70.148,101.454c-2.662,0-4.813-2.151-4.813-4.813 s2.15-4.813,4.813-4.813c2.661,0,4.813,2.151,4.813,4.813S72.809,101.454,70.148,101.454z"
 
 
 # ------------------------------------------------------------- geometry
@@ -422,23 +381,23 @@ def scene_optimizer(t):
 def scene_neuron(t):
     """Scene 3 — a multipolar neuron, drawn the way a biology plate draws one.
 
-    Every limb is a tapered filled ribbon, not a stroke: a centreline offset
-    perpendicular by a width that shrinks toward the tip. Soma, dendrites and
-    axon are painted in two passes — a fattened outline pass, then a fill pass
-    on top — so the whole cell reads as one continuous silhouette with no
-    internal seams where the branches meet the cell body.
+    Every limb is a tapered filled ribbon: a centreline offset perpendicular by
+    a width that shrinks toward the tip. Branches carry a constant curvature so
+    they arc instead of zig-zagging, and the arbor runs three levels deep.
+    Soma, dendrites and axon are painted in two passes — a fattened outline,
+    then a fill on top — so the cell reads as one continuous silhouette with no
+    seams where branches meet the cell body.
     """
     a = t["magenta"]
-    body = mix(t["sub"], a, 0.30)
+    body = mix(t["sub"], a, 0.32)
     cyc = 3.0
-    rng = random.Random(9)
-    sx0, sy0 = 162, 250
+    rng = random.Random(4)
+    sx0, sy0 = 168, 252
     o = head(96, "NEURON.SPIKE", "action potential", a, t)
 
     shapes, tips = [], []
 
     def ribbon(pts, w0, w1):
-        """Tapered polygon around a centreline."""
         n, left, right = len(pts), [], []
         for i, (x, y) in enumerate(pts):
             if i == 0:
@@ -455,11 +414,12 @@ def scene_neuron(t):
         return left + right[::-1]
 
     def grow(x, y, ang, ln, w0, w1, depth, chain):
+        curve = rng.uniform(-0.12, 0.12)          # constant bend = graceful arc
         pts, cx, cy, aa = [(round(x, 1), round(y, 1))], x, y, ang
-        for _ in range(5):
-            aa += rng.uniform(-0.17, 0.17)
-            cx += math.cos(aa) * ln / 5
-            cy += math.sin(aa) * ln / 5
+        for _ in range(8):
+            aa += curve + rng.uniform(-0.045, 0.045)
+            cx += math.cos(aa) * ln / 8
+            cy += math.sin(aa) * ln / 8
             pts.append((round(cx, 1), round(cy, 1)))
         shapes.append(ribbon(pts, w0, w1))
         chain = chain + pts[1:]
@@ -467,92 +427,83 @@ def scene_neuron(t):
             tips.append(chain)
             return
         for k in (-1, 1):
-            grow(cx, cy, aa + k * rng.uniform(0.36, 0.62),
-                 ln * rng.uniform(0.58, 0.74), w1, w1 * 0.52, depth - 1, chain)
+            grow(cx, cy, aa + k * rng.uniform(0.3, 0.55),
+                 ln * rng.uniform(0.6, 0.72), w1, max(w1 * 0.5, 1.4),
+                 depth - 1, chain)
 
-    # primary dendrites radiate everywhere except where the axon leaves
-    for ang in (1.55, 1.98, 2.42, 2.90, 3.42, 3.98, 5.42):
-        bx, by = sx0 + math.cos(ang) * 8, sy0 + math.sin(ang) * 8
-        grow(bx, by, ang, 30, 15, 7, 2, [(round(bx, 1), round(by, 1))])
+    for ang in (1.5, 1.95, 2.4, 2.88, 3.4, 3.95, 5.35):
+        bx, by = sx0 + math.cos(ang) * 9, sy0 + math.sin(ang) * 9
+        grow(bx, by, ang, 30, 16, 8, 3, [(round(bx, 1), round(by, 1))])
 
-    # soma
     soma = []
-    for i in range(56):
-        th = i / 56 * 6.28319
-        rr = 3.4 * math.sin(3 * th + 0.6) + 2.2 * math.sin(5 * th + 1.9)
-        soma.append((round(sx0 + math.cos(th) * (30 + rr), 1),
-                     round(sy0 + math.sin(th) * (27 + rr), 1)))
+    for i in range(64):
+        th = i / 64 * 6.28319
+        rr = 3.6 * math.sin(3 * th + 0.6) + 2.2 * math.sin(5 * th + 1.9)
+        soma.append((round(sx0 + math.cos(th) * (33 + rr), 1),
+                     round(sy0 + math.sin(th) * (29 + rr), 1)))
     shapes.append(soma)
 
-    # axon
-    guide = [(sx0 + 10, sy0 + 6), (214, 268), (254, 284), (296, 298),
-             (338, 310), (378, 318), (410, 322)]
+    guide = [(sx0 + 12, sy0 + 7), (218, 272), (258, 287), (300, 300),
+             (340, 311), (378, 318), (408, 322)]
     shapes.append(ribbon(guide, 14, 5))
 
-    # terminal branches, each ending in a bouton
     boutons = []
-    for ang, ln in ((-0.62, 30), (-0.24, 34), (0.2, 32), (0.62, 26)):
-        ex = 410 + math.cos(ang) * ln
-        ey = 322 + math.sin(ang) * ln
-        shapes.append(ribbon([(410, 322), (410 + math.cos(ang) * ln * 0.55,
-                                           322 + math.sin(ang) * ln * 0.55),
-                              (round(ex, 1), round(ey, 1))], 6, 3))
-        boutons.append((round(ex, 1), round(ey, 1)))
+    for ang, ln in ((-0.7, 30), (-0.3, 35), (0.12, 34), (0.55, 28)):
+        mxp = (round(408 + math.cos(ang) * ln * 0.55, 1),
+               round(322 + math.sin(ang) * ln * 0.55, 1))
+        ex, ey = round(408 + math.cos(ang) * ln, 1), round(322 + math.sin(ang) * ln, 1)
+        shapes.append(ribbon([(408, 322), mxp, (ex, ey)], 6, 2.6))
+        boutons.append((ex, ey))
 
-    # ---- pass 1: fattened outline, pass 2: fill on top (hides inner seams)
     for pg in shapes:
         o.append(f'<polygon points="{poly(pg)}" fill="{a}" stroke="{a}" '
-                 f'stroke-width="3.4" stroke-linejoin="round"/>')
+                 f'stroke-width="3.2" stroke-linejoin="round"/>')
     for bx, by in boutons:
-        o.append(f'<circle cx="{bx}" cy="{by}" r="6.4" fill="{a}"/>')
+        o.append(f'<circle cx="{bx}" cy="{by}" r="6.2" fill="{a}"/>')
     for pg in shapes:
         o.append(f'<polygon points="{poly(pg)}" fill="{body}"/>')
     for bx, by in boutons:
-        o.append(f'<circle cx="{bx}" cy="{by}" r="4.6" fill="{body}"/>')
+        o.append(f'<circle cx="{bx}" cy="{by}" r="4.4" fill="{body}"/>')
 
-    # nucleus
-    o.append(f'<circle cx="{sx0 - 3}" cy="{sy0}" r="10.5" fill="{t["green"]}" '
+    o.append(f'<circle cx="{sx0 - 3}" cy="{sy0}" r="11" fill="{t["green"]}" '
              f'opacity="0.9"/>')
-    o.append(f'<circle cx="{sx0 - 3}" cy="{sy0}" r="10.5" fill="none" '
+    o.append(f'<circle cx="{sx0 - 3}" cy="{sy0}" r="11" fill="none" '
              f'stroke="{t["green"]}" stroke-width="1.6"/>')
 
-    # ---- signals
-    for i, ch in enumerate(tips[::2]):
+    for i, ch in enumerate(tips[::5]):
         o.append(travel(list(reversed(ch)), a, cyc, round(i * 0.05, 2),
-                        sw=2.8, dash=12))
+                        sw=2.6, dash=12))
     o.append(f'<polygon points="{poly(soma)}" fill="{a}" opacity="0">'
              f'<animate attributeName="opacity" values="0;0.5;0" '
              f'keyTimes="0;0.44;0.62" dur="{cyc}s" repeatCount="indefinite"/></polygon>')
-    o.append(f'<circle cx="{sx0 - 3}" cy="{sy0}" r="10.5" fill="{t["value"]}" '
+    o.append(f'<circle cx="{sx0 - 3}" cy="{sy0}" r="11" fill="{t["value"]}" '
              f'opacity="0"><animate attributeName="opacity" values="0;0.55;0" '
              f'keyTimes="0;0.45;0.63" dur="{cyc}s" repeatCount="indefinite"/></circle>')
     o.append(travel(guide, a, cyc, round(cyc * 0.46, 2), sw=4, dash=22))
 
     for i, (bx, by) in enumerate(boutons):
-        o.append(f'<circle cx="{bx}" cy="{by}" r="6.4" fill="{a}" opacity="0">'
+        o.append(f'<circle cx="{bx}" cy="{by}" r="6.2" fill="{a}" opacity="0">'
                  f'<animate attributeName="opacity" values="0;1;0" '
                  f'keyTimes="0;0.9;1" dur="{cyc}s" begin="{round(i * 0.04, 2)}s" '
                  f'repeatCount="indefinite"/></circle>')
 
-    # synapse highlight, like the dashed call-out on a textbook plate
     o.append(f'<circle cx="428" cy="336" r="17" fill="none" stroke="{t["cyan"]}" '
              f'stroke-width="1.3" stroke-dasharray="4 4" opacity="0.35">'
              f'<animate attributeName="opacity" values="0.35;0.95;0.35" '
              f'dur="{cyc}s" begin="{round(cyc * 0.88, 2)}s" '
              f'repeatCount="indefinite"/></circle>')
 
-    # ---- labels with leader lines
     for lx, ly, anchor, label, tx, ty in (
-        (60, 150, "start", "dendrites", 96, 186),
-        (196, 136, "start", "soma", 176, 220),
-        (60, 348, "start", "nucleus", 150, 258),
-        (300, 252, "middle", "axon", 300, 290),
-        (IX1, 186, "end", "axon terminals", 420, 300),
-        (IX1, 384, "end", "synapse", 436, 350),
+        (58, 146, "start", "dendrites", 100, 182),
+        (206, 132, "start", "soma", 186, 220),
+        (58, 358, "start", "nucleus", 156, 260),
+        (300, 258, "middle", "axon", 300, 292),
+        (IX1, 178, "end", "axon terminals", 418, 300),
+        (IX1, 388, "end", "synapse", 436, 352),
     ):
         o.append(text(lx, ly, label, t["dim"], size=9.5, anchor=anchor))
         hx = lx + (18 if anchor == "start" else -18 if anchor == "end" else 0)
-        o.append(line(hx, ly + 5, tx, ty, t["dim"], 0.9, op=0.55))
+        o.append(line(hx, ly + 5, tx, ty, t["dim"], 0.9, op=0.5))
 
     o += head(420, "SPIKE.TRAIN", "28 ms window", a, t)
     base, x = 542, IX0 + 4
@@ -570,71 +521,40 @@ def scene_neuron(t):
 
 
 def scene_particles(t):
-    """Scene 4 — the official Python mark, sampled into particles.
+    """Scene 4 — the real Python logo in its official colours.
 
-    Geometry comes from the real logo path (Simple Icons, straight-line only),
-    flattened to polygons and filled with an even-odd test, so both eyes and
-    the interlock are exact rather than approximated.
+    Both snakes are the genuine path geometry from the python.org mark, drawn
+    as filled paths rather than sampled, so the curves are exact. They slide in
+    from opposite corners and interlock, then a highlight sweeps across.
     """
     a = t["blue"]
-    o = head(96, "RUNTIME.PYTHON", "particle build", a, t)
+    o = head(96, "RUNTIME.PYTHON", "official mark", a, t)
 
-    subs = logo_subpaths()
-
-    def piece(px, py):
-        if not in_polys(px, py, subs):
-            return None
-        return "u" if (py <= 12.2 and px <= 18.2) or (px <= 12.2 and py <= 18.2) \
-            else "l"
-
-
-    cx0, cy0, s, step = 250, 282, 10.6, 0.8
-    rng = random.Random(11)
-
-    dots, yy = [], 0.0
-    while yy <= 24.0:
-        xx = 0.0
-        while xx <= 24.0:
-            px = xx + rng.uniform(-0.26, 0.26)
-            py = yy + rng.uniform(-0.26, 0.26)
-            k = piece(px, py)
-            if k:
-                dots.append((px, py, k))
-            xx += step
-        yy += step
-
+    place = 'transform="translate(131,141) scale(2.2)"'
     base = 3 * HOLD                      # this scene opens at 15s of the 25s cycle
-    k0 = base / CYCLE
-    k3 = (base + HOLD - 1.0) / CYCLE
-    k4 = (base + HOLD) / CYCLE
+    k0, k1 = base / CYCLE, (base + 1.15) / CYCLE
+    k2, k3 = (base + HOLD - 1.0) / CYCLE, (base + HOLD) / CYCLE
+    kt = f"0;{k0:.4f};{k1:.4f};{k2:.4f};{k3:.4f};1"
 
-    for i, (px, py, k) in enumerate(dots):
-        sx = round(cx0 + (px - 12) * s, 1)
-        sy = round(cy0 + (py - 12) * s, 1)
-        col = mix(t["blue"], t["cyan"], px / 24) if k == "u" \
-            else mix(t["violet"], t["magenta"], px / 24)
+    for d, colour, off in ((PY_BLUE_D, "#4B8BBE", "-165,-165"),
+                           (PY_YELLOW_D, "#FFD43B", "165,165")):
+        o.append(f'<g><animateTransform attributeName="transform" '
+                 f'type="translate" values="{off};{off};0,0;0,0;{off};{off}" '
+                 f'keyTimes="{kt}" dur="{CYCLE:g}s" repeatCount="indefinite"/>'
+                 f'<path {place} d="{d}" fill="{colour}"/></g>')
 
-        edge = not all(piece(px + dx, py + dy) for dx, dy
-                       in ((0.85, 0), (-0.85, 0), (0, 0.85), (0, -0.85)))
-        r = 1.85 if edge else 1.2
-        op = 0.95 if edge else round(0.4 + rng.random() * 0.38, 2)
-
-        th = math.atan2(sy - cy0, sx - cx0)
-        R = 230 + rng.random() * 110
-        S = (f"{cx0 + math.cos(th + 1.5) * R - sx:.0f},"
-             f"{cy0 + math.sin(th + 1.5) * R - sy:.0f}")
-        M = (f"{cx0 + math.cos(th + 0.7) * R * 0.42 - sx:.0f},"
-             f"{cy0 + math.sin(th + 0.7) * R * 0.42 - sy:.0f}")
-        d = (i % 14) * 0.0016
-        k1 = (base + 0.9) / CYCLE + d
-        k2 = (base + 1.7) / CYCLE + d
-
-        o.append(
-            f'<circle cx="{sx}" cy="{sy}" r="{r}" fill="{col}" opacity="{op}">'
-            f'<animateTransform attributeName="transform" type="translate" '
-            f'values="{S};{S};{M};0,0;0,0;{S};{S}" '
-            f'keyTimes="0;{k0:.4f};{k1:.4f};{k2:.4f};{k3:.4f};{k4:.4f};1" '
-            f'dur="{CYCLE:g}s" repeatCount="indefinite"/></circle>')
+    o.append(f'<clipPath id="pyclip"><path {place} d="{PY_BLUE_D}"/>'
+             f'<path {place} d="{PY_YELLOW_D}"/></clipPath>')
+    o.append('<linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">'
+             '<stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/>'
+             '<stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.5"/>'
+             '<stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>'
+             '</linearGradient>')
+    o.append(f'<g clip-path="url(#pyclip)">'
+             f'<rect y="130" width="80" height="270" fill="url(#shine)" x="60">'
+             f'<animate attributeName="x" values="60;60;430;430" '
+             f'keyTimes="0;{k1:.4f};{k2:.4f};1" dur="{CYCLE:g}s" '
+             f'repeatCount="indefinite"/></rect></g>')
 
     o.append(line(IX0, 452, IX1, 452, t["border"], 1))
     x = IX0
@@ -646,7 +566,7 @@ def scene_particles(t):
         o.append(text(x + w / 2, 485, label, col, size=9.5, anchor="middle"))
         x += w + 8
 
-    o.append(text(IX0, 532, f"{len(dots)} particles · official logo geometry",
+    o.append(text(IX0, 532, "the layer every data and ML project here sits on",
                   t["dim"], size=9.5))
     o.append(text(IX0, 588, "import this  →  simple is better than complex",
                   t["dim"], size=9.5))
