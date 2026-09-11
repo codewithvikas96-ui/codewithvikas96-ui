@@ -2,13 +2,14 @@
 """
 Generates dark.svg / light.svg — the profile README hero banner.
 
-A terminal window containing:
-  left   : animated feed-forward network + live training-loss plot
-  right  : SYSTEM.INFO key/value readout with dotted leaders
-  bottom : PIPELINE.STATUS learning track
+An instrument-panel terminal containing:
+  left   : OPTIMIZER.TRACE   contour map + stepping gradient-descent marker
+           FEATURE.WEIGHTS   horizontal bars that fill on a loop
+  right  : SYSTEM.INFO       banded key/value readout
+  bottom : PIPELINE          segmented progress track
 
-Everything is plain SVG + SMIL. No external fonts, no raster images,
-no build step. Edit the DATA block below and re-run:
+Plain SVG + SMIL. No external fonts, no raster images, no build step.
+Edit the DATA block below and re-run:
 
     python generate_banner.py
 """
@@ -17,52 +18,55 @@ import math
 
 # ---------------------------------------------------------------- data
 
-HANDLE = "codewithvikas96-ui"  # <- your GitHub username (no spaces)
+HANDLE = "codewithvikas96-ui"
 
 INFO = [
-    ("Subject",       "Vikas Vishwakarma",                           "value"),
-    ("Role",          "AI / ML Engineer in Training",                "violet"),
-    ("Origin",        "India · IST (UTC+5:30)",                      "text"),
-    ("Status",        "Shipping ML projects · Learning Deep Learning", "emerald"),
-    ("Focus",         "Python → Data Science → ML → AI",             "text"),
-    ("Core.Lang",     "Python, C, C++, Java, JavaScript, TypeScript", "text"),
-    ("Data.Stack",    "NumPy, Pandas, Matplotlib, Seaborn, Jupyter", "text"),
-    ("ML.Stack",      "scikit-learn, XGBoost, LightGBM, CatBoost",   "text"),
-    ("ML.Methods",    "Regression, Ensembles, Clustering, PCA",      "text"),
-    ("AI.Loading",    "Deep Learning, NLP, Generative AI, Agents",   "amber"),
-    ("Core.Backend",  "Node.js, Express, Supabase Edge Functions",   "text"),
-    ("Core.Database", "PostgreSQL, MySQL, MongoDB, Oracle PL/SQL",   "text"),
-    ("Core.Mobile",   "React Native, Expo, TypeScript",              "text"),
-    ("Core.Tools",    "Git, GitHub, Jupyter, PyQt5",                 "text"),
-    ("Grid.Mail",     "vikas221018@gmail.com",                       "cyan"),
-    ("Grid.LinkedIn", "vikas-vishwakarma-62959a387",                 "cyan"),
-    ("Grid.GitHub",   HANDLE,                                        "cyan"),
+    ("Subject",       "Vikas Vishwakarma",                             "value"),
+    ("Role",          "AI / ML Engineer in Training",                  "steel"),
+    ("Origin",        "India · IST (UTC+5:30)",                        "text"),
+    ("Status",        "Shipping ML projects · Learning Deep Learning", "sage"),
+    ("Focus",         "Python → Data Science → ML → AI",               "text"),
+    ("Core.Lang",     "Python, C, C++, Java, JavaScript, TypeScript",  "text"),
+    ("Data.Stack",    "NumPy, Pandas, Matplotlib, Seaborn, Jupyter",   "text"),
+    ("ML.Stack",      "scikit-learn, XGBoost, LightGBM, CatBoost",     "text"),
+    ("ML.Methods",    "Regression, Ensembles, Clustering, PCA",        "text"),
+    ("AI.Loading",    "Deep Learning, NLP, Generative AI, Agents",     "amber"),
+    ("Core.Backend",  "Node.js, Express, Supabase Edge Functions",     "text"),
+    ("Core.Database", "PostgreSQL, MySQL, MongoDB, Oracle PL/SQL",     "text"),
+    ("Core.Mobile",   "React Native, Expo, TypeScript",                "text"),
+    ("Core.Tools",    "Git, GitHub, Jupyter, PyQt5",                   "text"),
+    ("Grid.Mail",     "vikas221018@gmail.com",                         "steel"),
+    ("Grid.LinkedIn", "vikas-vishwakarma-62959a387",                   "steel"),
+    ("Grid.GitHub",   HANDLE,                                          "amber"),
 ]
 
-# stage label, state: done | active | queued
+# label, weight 0..1  — feature importances from the ShopSmart model
+FEATURES = [
+    ("page_value",   0.92),
+    ("exit_rate",    0.71),
+    ("session_dur",  0.58),
+    ("visitor_type", 0.36),
+    ("month",        0.24),
+]
+
+# stage, state: done | active | queued
 PIPELINE = [
-    ("Python",   "done"),
-    ("DataSci",  "done"),
-    ("ML",       "done"),
-    ("DL",       "active"),
-    ("NLP",      "active"),
-    ("GenAI",    "queued"),
-    ("Agents",   "queued"),
-    ("Prod",     "queued"),
+    ("Python", "done"),    ("DataSci", "done"),  ("ML", "done"),
+    ("DL", "active"),      ("NLP", "active"),    ("GenAI", "queued"),
+    ("Agents", "queued"),  ("Prod", "queued"),
 ]
 
+# graphite + amber instrument panel (dark) / warm paper (light)
 THEMES = {
     "dark": dict(
-        bg="#0A101F", panel="#0F1626", sub="#0C1322", border="#1E2A44",
-        leader="#1E2A44", text="#94A3B8", value="#E2E8F0", dim="#64748B",
-        cyan="#22D3EE", violet="#A78BFA", emerald="#10B981",
-        amber="#F59E0B", red="#EF4444", grid="#16203A",
+        bg="#0B0D11", panel="#12151C", sub="#0E1117", band="#161A22",
+        border="#242A35", text="#8B94A3", value="#E9ECF1", dim="#5A6372",
+        amber="#E8A33D", steel="#6C8CC7", sage="#8FB573", rose="#E0685E",
     ),
     "light": dict(
-        bg="#EEF2F8", panel="#FFFFFF", sub="#F8FAFC", border="#CBD5E1",
-        leader="#E2E8F0", text="#64748B", value="#0F172A", dim="#94A3B8",
-        cyan="#0E7490", violet="#6D28D9", emerald="#047857",
-        amber="#B45309", red="#DC2626", grid="#EDF2F8",
+        bg="#F4F1EC", panel="#FFFFFF", sub="#FBF9F6", band="#F5F2EC",
+        border="#DED7CC", text="#6B6257", value="#1C1917", dim="#9C9285",
+        amber="#B4751A", steel="#3C5E9E", sage="#4F7A3A", rose="#B54A3E",
     ),
 }
 
@@ -73,13 +77,14 @@ WIN_X, WIN_Y, WIN_W, WIN_H = 20, 20, 1140, 600
 BAR_H = 36
 MONO = "ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace"
 
-L_X, L_W = 40, 424           # left panel
-R_X, R_W = 488, 652          # right column
-BOTTOM = 620                 # inner content floor
+L_X, L_W = 40, 424
+R_X, R_W = 488, 652
+BOTTOM = 620
+
+PLOT = (56, 118, 392, 250)      # x, y, w, h  — contour box
 
 
 def adv(size):
-    """Monospace advance width for a given font-size."""
     return size * 0.605
 
 
@@ -87,14 +92,12 @@ def esc(s):
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
-def text(x, y, s, fill, size=13, anchor="start", ls=None, weight=None, op=None):
+def text(x, y, s, fill, size=13, anchor="start", ls=None, op=None):
     a = f'<text x="{x}" y="{y}" font-family="{MONO}" font-size="{size}" fill="{fill}"'
     if anchor != "start":
         a += f' text-anchor="{anchor}"'
     if ls is not None:
         a += f' letter-spacing="{ls}"'
-    if weight:
-        a += f' font-weight="{weight}"'
     if op is not None:
         a += f' opacity="{op}"'
     return a + f">{esc(s)}</text>"
@@ -109,19 +112,17 @@ def rect(x, y, w, h, fill, stroke=None, rx=0, sw=1, op=None):
     return a + "/>"
 
 
-def line(x1, y1, x2, y2, stroke, sw=1, dash=None, op=None):
+def line(x1, y1, x2, y2, stroke, sw=1, op=None):
     a = f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="{stroke}" stroke-width="{sw}"'
-    if dash:
-        a += f' stroke-dasharray="{dash}"'
     if op is not None:
         a += f' opacity="{op}"'
     return a + "/>"
 
 
-def section(x, y, w, label, note, t):
-    """Section heading: accent label on the left, dim note on the right, rule under."""
+def head(x, y, w, label, note, t):
+    """Module heading: amber label, dim note, hairline rule."""
     return [
-        text(x, y, label, t["cyan"], size=11, ls=1.6),
+        text(x, y, label, t["amber"], size=11, ls=1.7),
         text(x + w, y, note, t["dim"], size=10, anchor="end"),
         line(x, y + 10, x + w, y + 10, t["border"], 1),
     ]
@@ -138,156 +139,135 @@ def title_bar(t):
     for i, c in enumerate(("#FF5F56", "#FFBD2E", "#27C93F")):
         o.append(f'<circle cx="{42 + i * 20}" cy="38" r="6" fill="{c}"/>')
 
-    o.append(text(590, 43, "vikas@ml-node : ~/profile — train.py --watch",
-                  t["text"], size=13, anchor="middle"))
+    cmd = "vikas@ml-node:~/profile$ python optimizer.py --trace"
+    cx = round(590 - len(cmd) * adv(13) / 2, 1)
+    o.append(text(cx, 43, cmd, t["text"], size=13))
 
-    pill_w = (len(HANDLE) + 1) * adv(12) + 26
-    o.append(rect(1048 - pill_w, 27, pill_w, 22, t["bg"], t["cyan"], rx=11, sw=1))
-    o.append(text(1048 - pill_w / 2, 42, "@" + HANDLE, t["cyan"], size=12, anchor="middle"))
+    # hard-blinking block caret — steps, never fades
+    caret_x = round(cx + len(cmd) * adv(13) + 2, 1)
+    o.append(f'<rect x="{caret_x}" y="31" width="8" height="14" fill="{t["amber"]}">'
+             f'<animate attributeName="opacity" values="1;0" dur="1.1s" '
+             f'calcMode="discrete" repeatCount="indefinite"/></rect>')
 
-    o.append(f'<circle cx="1064" cy="38" r="4" fill="{t["red"]}">'
-             f'<animate attributeName="opacity" values="1;0.25;1" dur="1.6s" '
-             f'repeatCount="indefinite"/></circle>')
-    o.append(text(1074, 42, "LIVE", t["red"], size=12, ls=1))
-
-    # accent rule under the title bar
-    o.append('<linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">'
-             f'<stop offset="0%" stop-color="{t["cyan"]}"/>'
-             f'<stop offset="50%" stop-color="{t["violet"]}"/>'
-             f'<stop offset="100%" stop-color="{t["emerald"]}"/></linearGradient>')
-    o.append(rect(WIN_X, WIN_Y + BAR_H, WIN_W, 1.5, "url(#accent)", op=0.65))
+    o.append(rect(1140 - len(HANDLE) * adv(12) - 14, 31, 4, 4, t["amber"]))
+    o.append(text(1140, 42, HANDLE, t["amber"], size=12, anchor="end"))
     return o
 
 
-def network(t):
-    """Animated feed-forward network. Signal sweeps left to right."""
-    o = section(L_X + 16, 96, L_W - 32, "NEURAL.NET", "forward pass", t)
+def optimizer(t):
+    """Contour map with a marker that steps toward the minimum."""
+    px, py, pw, ph = PLOT
+    o = head(L_X + 16, 96, L_W - 32, "OPTIMIZER.TRACE", "lr 0.05 · 9 steps", t)
+    o.append(rect(px, py, pw, ph, t["sub"], t["border"], rx=6))
 
-    layers = [4, 6, 6, 3]
-    colors = [t["cyan"], t["violet"], t["violet"], t["emerald"]]
-    xs = [116, 212, 308, 404]
-    cy, gap = 258, 40
+    o.append(f'<clipPath id="pbox"><rect x="{px}" y="{py}" width="{pw}" '
+             f'height="{ph}" rx="6"/></clipPath>')
+    o.append('<g clip-path="url(#pbox)">')
 
-    pos = []
-    for n, x in zip(layers, xs):
-        pos.append([(x, cy + (i - (n - 1) / 2) * gap) for i in range(n)])
+    mx, my = 310, 300
+    for i, (rx_, ry_) in enumerate(((26, 18), (54, 36), (86, 58), (122, 82), (162, 108))):
+        o.append(f'<ellipse cx="{mx}" cy="{my}" rx="{rx_}" ry="{ry_}" fill="none" '
+                 f'stroke="{t["dim"]}" stroke-width="1" '
+                 f'opacity="{round(0.5 - i * 0.07, 2)}" '
+                 f'transform="rotate(-22 {mx} {my})"/>')
+    o.append("</g>")
 
-    # edges first so nodes paint over them
-    for li in range(len(pos) - 1):
-        for a_i, (x1, y1) in enumerate(pos[li]):
-            for b_i, (x2, y2) in enumerate(pos[li + 1]):
-                begin = round(li * 0.5 + (a_i + b_i) * 0.055, 3)
-                o.append(
-                    f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" '
-                    f'stroke="{colors[li]}" stroke-width="0.9" opacity="0.1">'
-                    f'<animate attributeName="opacity" values="0.08;0.42;0.08" '
-                    f'dur="3.2s" begin="{begin}s" repeatCount="indefinite"/></line>'
-                )
+    sx, sy = 110, 170
+    pts = []
+    for i in range(10):
+        decay = math.exp(-0.45 * i)
+        wob = 7 * math.exp(-0.3 * i) * (1 if i % 2 else -1)
+        pts.append((round(mx + (sx - mx) * decay + wob, 1),
+                    round(my + (sy - my) * decay - wob * 0.5, 1)))
 
-    for li, layer in enumerate(pos):
-        for i, (x, y) in enumerate(layer):
-            begin = round(li * 0.5 + i * 0.09, 3)
-            o.append(
-                f'<circle cx="{x}" cy="{y}" r="7" fill="{t["sub"]}" '
-                f'stroke="{colors[li]}" stroke-width="1.5">'
-                f'<animate attributeName="r" values="7;8.4;7" dur="3.2s" '
-                f'begin="{begin}s" repeatCount="indefinite"/>'
-                f'<animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="3.2s" '
-                f'begin="{begin}s" repeatCount="indefinite"/></circle>'
-            )
+    o.append(f'<polyline points="{" ".join(f"{x},{y}" for x, y in pts)}" fill="none" '
+             f'stroke="{t["amber"]}" stroke-width="1.4" opacity="0.5" '
+             f'stroke-linejoin="round"/>')
+    for x, y in pts:
+        o.append(f'<circle cx="{x}" cy="{y}" r="2.6" fill="{t["sub"]}" '
+                 f'stroke="{t["amber"]}" stroke-width="1.2" opacity="0.75"/>')
 
-    for x, lbl in zip(xs, ("input", "h₁", "h₂", "out")):
-        o.append(text(x, 396, lbl, t["dim"], size=9.5, anchor="middle"))
-    return o
+    o.append(f'<circle cx="{mx}" cy="{my}" r="4" fill="{t["sage"]}"/>')
+    o.append(text(mx + 10, my + 4, "min", t["sage"], size=9.5))
 
-
-def loss_plot(t):
-    """Training-loss curve that redraws itself on a loop."""
-    o = section(L_X + 16, 436, L_W - 32, "TRAINING.LOSS", "epoch 120 / 120", t)
-
-    px, py, pw, ph = L_X + 16, 458, L_W - 32, 124
-    o.append(rect(px, py, pw, ph, t["grid"], op=0.5, rx=4))
-    for i in range(1, 4):
-        y = py + ph * i / 4
-        o.append(line(px, y, px + pw, y, t["border"], 1, dash="2 5", op=0.7))
-
-    pts, n = [], 64
-    for i in range(n):
-        u = i / (n - 1)
-        v = math.exp(-2.4 * u) * (1 + 0.09 * math.sin(u * 27) + 0.05 * math.sin(u * 11 + 1.3))
-        pts.append((round(px + 6 + u * (pw - 12), 2),
-                    round(py + 10 + (1 - min(v, 1.0)) * (ph - 22), 2)))
-
-    length = sum(math.dist(pts[i], pts[i + 1]) for i in range(len(pts) - 1))
-    d = "M " + " L ".join(f"{x} {y}" for x, y in pts)
-
-    o.append(f'<path d="{d} L {pts[-1][0]} {py + ph} L {pts[0][0]} {py + ph} Z" '
-             f'fill="{t["emerald"]}" opacity="0.07"/>')
+    xs = ";".join(str(x) for x, _ in pts)
+    ys = ";".join(str(y) for _, y in pts)
     o.append(
-        f'<path d="{d}" fill="none" stroke="{t["emerald"]}" stroke-width="2" '
-        f'stroke-linecap="round" stroke-linejoin="round" '
-        f'stroke-dasharray="{length:.0f}" stroke-dashoffset="{length:.0f}">'
-        f'<animate attributeName="stroke-dashoffset" values="{length:.0f};0;0" '
-        f'keyTimes="0;0.75;1" dur="6s" repeatCount="indefinite"/></path>'
+        f'<circle r="5.5" fill="{t["amber"]}" cx="{pts[0][0]}" cy="{pts[0][1]}">'
+        f'<animate attributeName="cx" values="{xs}" dur="4.5s" calcMode="discrete" '
+        f'repeatCount="indefinite"/>'
+        f'<animate attributeName="cy" values="{ys}" dur="4.5s" calcMode="discrete" '
+        f'repeatCount="indefinite"/></circle>'
     )
-    o.append(f'<circle cx="{pts[-1][0]}" cy="{pts[-1][1]}" r="3.5" fill="{t["emerald"]}">'
-             f'<animate attributeName="opacity" values="0;0;1;0.4;1" '
-             f'keyTimes="0;0.72;0.8;0.9;1" dur="6s" repeatCount="indefinite"/></circle>')
+    o.append(text(px + 10, py + ph - 10, "∇ gradient descent", t["dim"], size=9.5))
+    o.append(text(px + pw - 10, py + ph - 10, "converged", t["sage"],
+                  size=9.5, anchor="end"))
+    return o
 
-    o.append(line(px, py + ph, px + pw, py + ph, t["border"], 1))
-    o.append(text(px, 600, "loss  0.0312 ↓", t["emerald"], size=10))
-    o.append(text(px + pw, 600, "val_acc  0.94", t["dim"], size=10, anchor="end"))
+
+def features(t):
+    """Feature-importance bars that grow, hold, then reset."""
+    o = head(L_X + 16, 392, L_W - 32, "FEATURE.WEIGHTS", "gain, normalised", t)
+    x0, maxw = 152, 258
+
+    for i, (label, weight) in enumerate(FEATURES):
+        y = 416 + i * 32
+        w = round(maxw * weight, 1)
+        o.append(text(L_X + 16, y + 9, label, t["text"], size=11))
+        o.append(rect(x0, y, maxw, 10, t["band"], rx=5))
+        o.append(
+            f'<rect x="{x0}" y="{y}" width="0" height="10" rx="5" fill="{t["amber"]}">'
+            f'<animate attributeName="width" values="0;{w};{w};0" '
+            f'keyTimes="0;0.42;0.88;1" dur="5.5s" begin="{round(i * 0.16, 2)}s" '
+            f'repeatCount="indefinite"/></rect>'
+        )
+        o.append(text(x0 + w + 8, y + 9, f"{weight:.2f}", t["dim"], size=10))
     return o
 
 
 def system_info(t):
-    o = section(R_X, 96, R_W, "SYSTEM.INFO", "17 records", t)
-    y, step, size = 130, 22, 13
+    o = head(R_X, 96, R_W, "SYSTEM.INFO", f"{len(INFO)} records", t)
+    y, step, size = 126, 22, 13
 
-    for key, val, tone in INFO:
-        o.append(text(R_X, y, key, t["text"], size=size))
-        o.append(text(R_X + R_W, y, val, t[tone] if tone in t else t["value"],
-                      size=size, anchor="end"))
-        x1 = R_X + len(key) * adv(size) + 10
-        x2 = R_X + R_W - len(val) * adv(size) - 10
-        if x2 - x1 > 16:
-            o.append(line(x1, y - 4, x2, y - 4, t["leader"], 1, dash="1 4"))
+    for i, (key, val, tone) in enumerate(INFO):
+        if i % 2 == 0:
+            o.append(rect(R_X, y - 14, R_W, 20, t["band"], rx=3, op=0.6))
+        accent = t[tone] if tone in ("amber", "steel", "sage") else t["border"]
+        o.append(rect(R_X, y - 13, 2, 18, accent, op=0.9))
+        o.append(text(R_X + 12, y, key, t["text"], size=size))
+        o.append(text(R_X + R_W - 8, y, val, t[tone], size=size, anchor="end"))
         y += step
     return o
 
 
 def pipeline(t):
     done = sum(1 for _, s in PIPELINE if s == "done")
-    active = sum(1 for _, s in PIPELINE if s == "active")
-    o = section(R_X, 530, R_W, "PIPELINE.STATUS",
-                f"{done}/{len(PIPELINE)} complete · {active} active", t)
+    act = sum(1 for _, s in PIPELINE if s == "active")
+    o = head(R_X, 524, R_W, "PIPELINE",
+             f"{done} complete · {act} in progress", t)
 
-    x0, x1, cy = R_X + 28, R_X + R_W - 28, 574
-    step = (x1 - x0) / (len(PIPELINE) - 1)
-    tone = {"done": t["emerald"], "active": t["amber"], "queued": t["dim"]}
-
-    for i in range(len(PIPELINE) - 1):
-        a, b = x0 + i * step, x0 + (i + 1) * step
-        c = tone["done"] if PIPELINE[i + 1][1] == "done" else t["border"]
-        o.append(line(a + 11, cy, b - 11, cy, c, 1.5, op=0.75))
+    n = len(PIPELINE)
+    gap, y, h = 4, 548, 18
+    seg = (R_W - gap * (n - 1)) / n
 
     for i, (label, state) in enumerate(PIPELINE):
-        x, c = x0 + i * step, tone[state]
+        x = R_X + i * (seg + gap)
         if state == "done":
-            o.append(f'<circle cx="{x}" cy="{cy}" r="8" fill="{c}" opacity="0.18"/>')
-            o.append(f'<circle cx="{x}" cy="{cy}" r="4.5" fill="{c}"/>')
+            o.append(rect(x, y, seg, h, t["sage"], rx=3, op=0.85))
         elif state == "active":
-            o.append(f'<circle cx="{x}" cy="{cy}" r="8" fill="none" stroke="{c}" '
-                     f'stroke-width="1.5"><animate attributeName="r" values="7;10;7" '
-                     f'dur="2.4s" begin="{i * 0.4}s" repeatCount="indefinite"/>'
-                     f'<animate attributeName="opacity" values="1;0.3;1" dur="2.4s" '
-                     f'begin="{i * 0.4}s" repeatCount="indefinite"/></circle>')
-            o.append(f'<circle cx="{x}" cy="{cy}" r="4" fill="{c}"/>')
+            o.append(rect(x, y, seg, h, t["band"], t["amber"], rx=3, sw=1.2))
+            o.append(f'<rect x="{x}" y="{y}" width="{seg}" height="{h}" rx="3" '
+                     f'fill="{t["amber"]}" opacity="0.55">'
+                     f'<animate attributeName="opacity" values="0.55;0.12" dur="1.6s" '
+                     f'calcMode="discrete" begin="{i * 0.8}s" '
+                     f'repeatCount="indefinite"/></rect>')
         else:
-            o.append(f'<circle cx="{x}" cy="{cy}" r="4.5" fill="{t["sub"]}" '
-                     f'stroke="{t["border"]}" stroke-width="1.5"/>')
-        o.append(text(x, cy + 22, label, c if state != "queued" else t["dim"],
-                      size=9.5, anchor="middle"))
+            o.append(rect(x, y, seg, h, t["sub"], t["border"], rx=3))
+
+        col = {"done": t["sage"], "active": t["amber"], "queued": t["dim"]}[state]
+        o.append(text(x + seg / 2, y + 34, label, col, size=9.5, anchor="middle"))
+
+    o.append(text(R_X, 604, "roadmap · each stage earned by shipping", t["dim"], size=9.5))
     return o
 
 
@@ -303,8 +283,8 @@ def build(t):
     ]
     o += title_bar(t)
     o.append(rect(L_X, 72, L_W, BOTTOM - 72, t["sub"], t["border"], rx=8))
-    o += network(t)
-    o += loss_plot(t)
+    o += optimizer(t)
+    o += features(t)
     o += system_info(t)
     o += pipeline(t)
     o.append("</svg>")
@@ -313,7 +293,6 @@ def build(t):
 
 if __name__ == "__main__":
     for name, theme in THEMES.items():
-        out = f"{name}.svg"
-        with open(out, "w", encoding="utf-8") as f:
+        with open(f"{name}.svg", "w", encoding="utf-8") as f:
             f.write(build(theme))
-        print(f"wrote {out}")
+        print(f"wrote {name}.svg")
