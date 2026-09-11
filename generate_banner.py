@@ -378,21 +378,91 @@ def scene_optimizer(t):
     return o
 
 
+_PATH_TOK = r"[MmLlHhVvCcSsZz]|-?\d*\.?\d+(?:[eE][-+]?\d+)?"
+
+
+def flatten(d, steps=16):
+    """Flatten an SVG path (incl. cubic and smooth-cubic) into polygons."""
+    toks = re.findall(_PATH_TOK, d)
+    subs, cur = [], []
+    x = y = sx = sy = cx2 = cy2 = 0.0
+    i, cmd = 0, None
+
+    def num():
+        nonlocal i
+        v = float(toks[i]); i += 1
+        return v
+
+    def cubic(x1, y1, x2, y2, x3, y3):
+        nonlocal x, y, cx2, cy2
+        x0, y0 = x, y
+        for s in range(1, steps + 1):
+            u = s / steps
+            m = 1 - u
+            cur.append((round(m*m*m*x0 + 3*m*m*u*x1 + 3*m*u*u*x2 + u*u*u*x3, 3),
+                        round(m*m*m*y0 + 3*m*m*u*y1 + 3*m*u*u*y2 + u*u*u*y3, 3)))
+        x, y, cx2, cy2 = x3, y3, x2, y2
+
+    while i < len(toks):
+        if re.match(r"[A-Za-z]", toks[i]):
+            cmd = toks[i]; i += 1
+            if cmd in "Zz":
+                if cur:
+                    cur.append((sx, sy)); subs.append(cur); cur = []
+                x, y = sx, sy
+                continue
+        if cmd in "Mm":
+            a, b = num(), num()
+            x, y = (a, b) if cmd == "M" else (x + a, y + b)
+            if cur: subs.append(cur)
+            cur = [(x, y)]; sx, sy = x, y
+            cmd = "L" if cmd == "M" else "l"
+        elif cmd in "Ll":
+            a, b = num(), num()
+            x, y = (a, b) if cmd == "L" else (x + a, y + b); cur.append((x, y))
+        elif cmd in "Hh":
+            a = num(); x = a if cmd == "H" else x + a; cur.append((x, y))
+        elif cmd in "Vv":
+            a = num(); y = a if cmd == "V" else y + a; cur.append((x, y))
+        elif cmd in "Cc":
+            a, b, c, e, f, g = (num() for _ in range(6))
+            if cmd == "c":
+                a, b, c, e, f, g = x+a, y+b, x+c, y+e, x+f, y+g
+            cubic(a, b, c, e, f, g)
+        elif cmd in "Ss":
+            c, e, f, g = (num() for _ in range(4))
+            if cmd == "s":
+                c, e, f, g = x+c, y+e, x+f, y+g
+            cubic(2*x - cx2, 2*y - cy2, c, e, f, g)
+    if cur:
+        subs.append(cur)
+    return subs
+
+
+def in_polys(px, py, subs):
+    """Even-odd fill test — each snake's eye hole falls out for free."""
+    c = False
+    for sp in subs:
+        for k in range(len(sp) - 1):
+            x1, y1 = sp[k]; x2, y2 = sp[k + 1]
+            if (y1 > py) != (y2 > py) and px < x1 + (py - y1) / (y2 - y1) * (x2 - x1):
+                c = not c
+    return c
+
+
 def scene_neuron(t):
     """Scene 3 — a multipolar neuron, drawn the way a biology plate draws one.
 
     Every limb is a tapered filled ribbon: a centreline offset perpendicular by
-    a width that shrinks toward the tip. Branches carry a constant curvature so
-    they arc instead of zig-zagging, and the arbor runs three levels deep.
-    Soma, dendrites and axon are painted in two passes — a fattened outline,
-    then a fill on top — so the cell reads as one continuous silhouette with no
-    seams where branches meet the cell body.
+    a width that shrinks toward the tip. Soma, dendrites and axon are painted in
+    two passes — a fattened outline, then a fill on top — so the cell reads as
+    one continuous silhouette with no seams where branches meet the cell body.
     """
     a = t["magenta"]
-    body = mix(t["sub"], a, 0.32)
+    body = mix(t["sub"], a, 0.30)
     cyc = 3.0
-    rng = random.Random(4)
-    sx0, sy0 = 168, 252
+    rng = random.Random(9)
+    sx0, sy0 = 162, 250
     o = head(96, "NEURON.SPIKE", "action potential", a, t)
 
     shapes, tips = [], []
@@ -414,12 +484,11 @@ def scene_neuron(t):
         return left + right[::-1]
 
     def grow(x, y, ang, ln, w0, w1, depth, chain):
-        curve = rng.uniform(-0.12, 0.12)          # constant bend = graceful arc
         pts, cx, cy, aa = [(round(x, 1), round(y, 1))], x, y, ang
-        for _ in range(8):
-            aa += curve + rng.uniform(-0.045, 0.045)
-            cx += math.cos(aa) * ln / 8
-            cy += math.sin(aa) * ln / 8
+        for _ in range(5):
+            aa += rng.uniform(-0.17, 0.17)
+            cx += math.cos(aa) * ln / 5
+            cy += math.sin(aa) * ln / 5
             pts.append((round(cx, 1), round(cy, 1)))
         shapes.append(ribbon(pts, w0, w1))
         chain = chain + pts[1:]
@@ -427,62 +496,61 @@ def scene_neuron(t):
             tips.append(chain)
             return
         for k in (-1, 1):
-            grow(cx, cy, aa + k * rng.uniform(0.3, 0.55),
-                 ln * rng.uniform(0.6, 0.72), w1, max(w1 * 0.5, 1.4),
-                 depth - 1, chain)
+            grow(cx, cy, aa + k * rng.uniform(0.36, 0.62),
+                 ln * rng.uniform(0.58, 0.74), w1, w1 * 0.52, depth - 1, chain)
 
-    for ang in (1.5, 1.95, 2.4, 2.88, 3.4, 3.95, 5.35):
-        bx, by = sx0 + math.cos(ang) * 9, sy0 + math.sin(ang) * 9
-        grow(bx, by, ang, 30, 16, 8, 3, [(round(bx, 1), round(by, 1))])
+    for ang in (1.55, 1.98, 2.42, 2.90, 3.42, 3.98, 5.42):
+        bx, by = sx0 + math.cos(ang) * 8, sy0 + math.sin(ang) * 8
+        grow(bx, by, ang, 30, 15, 7, 2, [(round(bx, 1), round(by, 1))])
 
     soma = []
-    for i in range(64):
-        th = i / 64 * 6.28319
-        rr = 3.6 * math.sin(3 * th + 0.6) + 2.2 * math.sin(5 * th + 1.9)
-        soma.append((round(sx0 + math.cos(th) * (33 + rr), 1),
-                     round(sy0 + math.sin(th) * (29 + rr), 1)))
+    for i in range(56):
+        th = i / 56 * 6.28319
+        rr = 3.4 * math.sin(3 * th + 0.6) + 2.2 * math.sin(5 * th + 1.9)
+        soma.append((round(sx0 + math.cos(th) * (30 + rr), 1),
+                     round(sy0 + math.sin(th) * (27 + rr), 1)))
     shapes.append(soma)
 
-    guide = [(sx0 + 12, sy0 + 7), (218, 272), (258, 287), (300, 300),
-             (340, 311), (378, 318), (408, 322)]
+    guide = [(sx0 + 10, sy0 + 6), (214, 268), (254, 284), (296, 298),
+             (338, 310), (378, 318), (410, 322)]
     shapes.append(ribbon(guide, 14, 5))
 
     boutons = []
-    for ang, ln in ((-0.7, 30), (-0.3, 35), (0.12, 34), (0.55, 28)):
-        mxp = (round(408 + math.cos(ang) * ln * 0.55, 1),
+    for ang, ln in ((-0.62, 30), (-0.24, 34), (0.2, 32), (0.62, 26)):
+        mid = (round(410 + math.cos(ang) * ln * 0.55, 1),
                round(322 + math.sin(ang) * ln * 0.55, 1))
-        ex, ey = round(408 + math.cos(ang) * ln, 1), round(322 + math.sin(ang) * ln, 1)
-        shapes.append(ribbon([(408, 322), mxp, (ex, ey)], 6, 2.6))
+        ex, ey = round(410 + math.cos(ang) * ln, 1), round(322 + math.sin(ang) * ln, 1)
+        shapes.append(ribbon([(410, 322), mid, (ex, ey)], 6, 3))
         boutons.append((ex, ey))
 
     for pg in shapes:
         o.append(f'<polygon points="{poly(pg)}" fill="{a}" stroke="{a}" '
-                 f'stroke-width="3.2" stroke-linejoin="round"/>')
+                 f'stroke-width="3.4" stroke-linejoin="round"/>')
     for bx, by in boutons:
-        o.append(f'<circle cx="{bx}" cy="{by}" r="6.2" fill="{a}"/>')
+        o.append(f'<circle cx="{bx}" cy="{by}" r="6.4" fill="{a}"/>')
     for pg in shapes:
         o.append(f'<polygon points="{poly(pg)}" fill="{body}"/>')
     for bx, by in boutons:
-        o.append(f'<circle cx="{bx}" cy="{by}" r="4.4" fill="{body}"/>')
+        o.append(f'<circle cx="{bx}" cy="{by}" r="4.6" fill="{body}"/>')
 
-    o.append(f'<circle cx="{sx0 - 3}" cy="{sy0}" r="11" fill="{t["green"]}" '
+    o.append(f'<circle cx="{sx0 - 3}" cy="{sy0}" r="10.5" fill="{t["green"]}" '
              f'opacity="0.9"/>')
-    o.append(f'<circle cx="{sx0 - 3}" cy="{sy0}" r="11" fill="none" '
+    o.append(f'<circle cx="{sx0 - 3}" cy="{sy0}" r="10.5" fill="none" '
              f'stroke="{t["green"]}" stroke-width="1.6"/>')
 
-    for i, ch in enumerate(tips[::5]):
+    for i, ch in enumerate(tips[::2]):
         o.append(travel(list(reversed(ch)), a, cyc, round(i * 0.05, 2),
-                        sw=2.6, dash=12))
+                        sw=2.8, dash=12))
     o.append(f'<polygon points="{poly(soma)}" fill="{a}" opacity="0">'
              f'<animate attributeName="opacity" values="0;0.5;0" '
              f'keyTimes="0;0.44;0.62" dur="{cyc}s" repeatCount="indefinite"/></polygon>')
-    o.append(f'<circle cx="{sx0 - 3}" cy="{sy0}" r="11" fill="{t["value"]}" '
+    o.append(f'<circle cx="{sx0 - 3}" cy="{sy0}" r="10.5" fill="{t["value"]}" '
              f'opacity="0"><animate attributeName="opacity" values="0;0.55;0" '
              f'keyTimes="0;0.45;0.63" dur="{cyc}s" repeatCount="indefinite"/></circle>')
     o.append(travel(guide, a, cyc, round(cyc * 0.46, 2), sw=4, dash=22))
 
     for i, (bx, by) in enumerate(boutons):
-        o.append(f'<circle cx="{bx}" cy="{by}" r="6.2" fill="{a}" opacity="0">'
+        o.append(f'<circle cx="{bx}" cy="{by}" r="6.4" fill="{a}" opacity="0">'
                  f'<animate attributeName="opacity" values="0;1;0" '
                  f'keyTimes="0;0.9;1" dur="{cyc}s" begin="{round(i * 0.04, 2)}s" '
                  f'repeatCount="indefinite"/></circle>')
@@ -494,16 +562,16 @@ def scene_neuron(t):
              f'repeatCount="indefinite"/></circle>')
 
     for lx, ly, anchor, label, tx, ty in (
-        (58, 146, "start", "dendrites", 100, 182),
-        (206, 132, "start", "soma", 186, 220),
-        (58, 358, "start", "nucleus", 156, 260),
-        (300, 258, "middle", "axon", 300, 292),
-        (IX1, 178, "end", "axon terminals", 418, 300),
-        (IX1, 388, "end", "synapse", 436, 352),
+        (60, 150, "start", "dendrites", 96, 186),
+        (196, 136, "start", "soma", 176, 220),
+        (60, 348, "start", "nucleus", 150, 258),
+        (300, 252, "middle", "axon", 300, 290),
+        (IX1, 186, "end", "axon terminals", 420, 300),
+        (IX1, 384, "end", "synapse", 436, 350),
     ):
         o.append(text(lx, ly, label, t["dim"], size=9.5, anchor=anchor))
         hx = lx + (18 if anchor == "start" else -18 if anchor == "end" else 0)
-        o.append(line(hx, ly + 5, tx, ty, t["dim"], 0.9, op=0.5))
+        o.append(line(hx, ly + 5, tx, ty, t["dim"], 0.9, op=0.55))
 
     o += head(420, "SPIKE.TRAIN", "28 ms window", a, t)
     base, x = 542, IX0 + 4
@@ -521,40 +589,72 @@ def scene_neuron(t):
 
 
 def scene_particles(t):
-    """Scene 4 — the real Python logo in its official colours.
+    """Scene 4 — the Python mark as particles that swirl into place.
 
-    Both snakes are the genuine path geometry from the python.org mark, drawn
-    as filled paths rather than sampled, so the curves are exact. They slide in
-    from opposite corners and interlock, then a highlight sweeps across.
+    Each snake is sampled from its own real path (python.org geometry, cubics
+    flattened, even-odd filled) so the silhouette and both eyes are exact, and
+    the two halves can carry their own colour ramp.
     """
     a = t["blue"]
-    o = head(96, "RUNTIME.PYTHON", "official mark", a, t)
+    o = head(96, "RUNTIME.PYTHON", "particle build", a, t)
 
-    place = 'transform="translate(131,141) scale(2.2)"'
+    upper, lower = flatten(PY_BLUE_D), flatten(PY_YELLOW_D)
+
+    def piece(px, py):
+        if in_polys(px, py, upper):
+            return "u"
+        if in_polys(px, py, lower):
+            return "l"
+        return None
+
+    cx0, cy0, s, step = 250, 268, 2.28, 3.0
+    rng = random.Random(11)
+
+    dots, yy = [], 0.0
+    while yy <= 110.0:
+        xx = 0.0
+        while xx <= 110.0:
+            px = xx + rng.uniform(-0.9, 0.9)
+            py = yy + rng.uniform(-0.9, 0.9)
+            k = piece(px, py)
+            if k:
+                dots.append((px, py, k))
+            xx += step
+        yy += step
+
     base = 3 * HOLD                      # this scene opens at 15s of the 25s cycle
-    k0, k1 = base / CYCLE, (base + 1.15) / CYCLE
-    k2, k3 = (base + HOLD - 1.0) / CYCLE, (base + HOLD) / CYCLE
-    kt = f"0;{k0:.4f};{k1:.4f};{k2:.4f};{k3:.4f};1"
+    k0 = base / CYCLE
+    k3 = (base + HOLD - 1.0) / CYCLE
+    k4 = (base + HOLD) / CYCLE
 
-    for d, colour, off in ((PY_BLUE_D, "#4B8BBE", "-165,-165"),
-                           (PY_YELLOW_D, "#FFD43B", "165,165")):
-        o.append(f'<g><animateTransform attributeName="transform" '
-                 f'type="translate" values="{off};{off};0,0;0,0;{off};{off}" '
-                 f'keyTimes="{kt}" dur="{CYCLE:g}s" repeatCount="indefinite"/>'
-                 f'<path {place} d="{d}" fill="{colour}"/></g>')
+    for i, (px, py, k) in enumerate(dots):
+        sx = round(cx0 + (px - 55) * s, 1)
+        sy = round(cy0 + (py - 55) * s, 1)
+        u = px / 110
+        col = mix(t["blue"], t["cyan"], u) if k == "u" \
+            else mix(t["violet"], t["magenta"], u)
 
-    o.append(f'<clipPath id="pyclip"><path {place} d="{PY_BLUE_D}"/>'
-             f'<path {place} d="{PY_YELLOW_D}"/></clipPath>')
-    o.append('<linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">'
-             '<stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/>'
-             '<stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.5"/>'
-             '<stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>'
-             '</linearGradient>')
-    o.append(f'<g clip-path="url(#pyclip)">'
-             f'<rect y="130" width="80" height="270" fill="url(#shine)" x="60">'
-             f'<animate attributeName="x" values="60;60;430;430" '
-             f'keyTimes="0;{k1:.4f};{k2:.4f};1" dur="{CYCLE:g}s" '
-             f'repeatCount="indefinite"/></rect></g>')
+        edge = not all(piece(px + dx, py + dy) for dx, dy
+                       in ((3.2, 0), (-3.2, 0), (0, 3.2), (0, -3.2)))
+        r = 1.9 if edge else 1.3
+        op = 0.95 if edge else round(0.45 + rng.random() * 0.35, 2)
+
+        th = math.atan2(sy - cy0, sx - cx0)
+        R = 230 + rng.random() * 110
+        S = (f"{cx0 + math.cos(th + 1.5) * R - sx:.0f},"
+             f"{cy0 + math.sin(th + 1.5) * R - sy:.0f}")
+        M = (f"{cx0 + math.cos(th + 0.7) * R * 0.42 - sx:.0f},"
+             f"{cy0 + math.sin(th + 0.7) * R * 0.42 - sy:.0f}")
+        d = (i % 14) * 0.0016
+        k1 = (base + 0.9) / CYCLE + d
+        k2 = (base + 1.7) / CYCLE + d
+
+        o.append(
+            f'<circle cx="{sx}" cy="{sy}" r="{r}" fill="{col}" opacity="{op}">'
+            f'<animateTransform attributeName="transform" type="translate" '
+            f'values="{S};{S};{M};0,0;0,0;{S};{S}" '
+            f'keyTimes="0;{k0:.4f};{k1:.4f};{k2:.4f};{k3:.4f};{k4:.4f};1" '
+            f'dur="{CYCLE:g}s" repeatCount="indefinite"/></circle>')
 
     o.append(line(IX0, 452, IX1, 452, t["border"], 1))
     x = IX0
@@ -566,7 +666,7 @@ def scene_particles(t):
         o.append(text(x + w / 2, 485, label, col, size=9.5, anchor="middle"))
         x += w + 8
 
-    o.append(text(IX0, 532, "the layer every data and ML project here sits on",
+    o.append(text(IX0, 532, f"{len(dots)} particles · official logo geometry",
                   t["dim"], size=9.5))
     o.append(text(IX0, 588, "import this  →  simple is better than complex",
                   t["dim"], size=9.5))
