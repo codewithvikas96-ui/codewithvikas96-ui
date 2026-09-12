@@ -6,8 +6,9 @@
     generate_banner.py    -> dark.svg / light.svg              (hero)
     generate_sections.py  -> capabilities / trajectory /       (sections
                              roadmap / buildlog -dark|-light    01, 02, 04, 06)
+    generate_projects.py  -> project-01..06-dark|-light        (section 03)
 
-  generate_sections.py imports its palette and helpers from generate_banner.py,
+  Both section scripts import their palette and helpers from generate_banner.py,
   so the hero and the body can never drift apart. To update: edit the data
   block at the top of the relevant script, run it, re-upload the SVGs it wrote.
   Prose stays in markdown on purpose — only chrome and diagrams are SVG.
@@ -88,10 +89,11 @@ background with model work.
 
 <br/>
 
-> **Purpose** — Turn a full IPL 2022 season into an interactive analytical story
-> instead of a static spreadsheet.
-
-**Stack** `Python` · `Pandas` · `NumPy` · `Matplotlib` · `Seaborn` · `Streamlit`
+<picture>
+  <source media="(prefers-color-scheme: dark)"  srcset="https://raw.githubusercontent.com/codewithvikas96-ui/codewithvikas96-ui/main/project-01-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/codewithvikas96-ui/codewithvikas96-ui/main/project-01-light.svg">
+  <img alt="01 — IPL 2022 Data Analysis · Data Analysis. A full IPL 2022 season turned into an interactive analytical story instead of a static spreadsheet. Stack: Python, Pandas, NumPy, Matplotlib, Seaborn, Streamlit. Match-level EDA, interactive Streamlit dashboard." src="https://raw.githubusercontent.com/codewithvikas96-ui/codewithvikas96-ui/main/project-01-light.svg">
+</picture>
 
 **What it does**
 - Cleans and reshapes raw match-level data into analysis-ready frames
@@ -112,10 +114,11 @@ background with model work.
 
 <br/>
 
-> **Purpose** — Predict whether an online browsing session will generate revenue,
-> using behavioural signals from that session.
-
-**Stack** `Python` · `scikit-learn` · `Decision Tree Classifier` · `Pandas`
+<picture>
+  <source media="(prefers-color-scheme: dark)"  srcset="https://raw.githubusercontent.com/codewithvikas96-ui/codewithvikas96-ui/main/project-02-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/codewithvikas96-ui/codewithvikas96-ui/main/project-02-light.svg">
+  <img alt="02 — ShopSmart · Machine Learning. Predicts whether an online browsing session will generate revenue, from behavioural signals in that session. Stack: Python, scikit-learn, Decision Tree, Pandas. Engineered session features, class-aware evaluation." src="https://raw.githubusercontent.com/codewithvikas96-ui/codewithvikas96-ui/main/project-02-light.svg">
+</picture>
 
 **What it does**
 - Engineers features from raw session behaviour (page types, durations, intent signals)
@@ -136,10 +139,11 @@ background with model work.
 
 <br/>
 
-> **Purpose** — Compare classical classifiers on a realistic credit-decision problem
-> and understand *why* one wins.
-
-**Stack** `Python` · `Logistic Regression` · `KNN` · `Gaussian Naive Bayes` · `scikit-learn`
+<picture>
+  <source media="(prefers-color-scheme: dark)"  srcset="https://raw.githubusercontent.com/codewithvikas96-ui/codewithvikas96-ui/main/project-03-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/codewithvikas96-ui/codewithvikas96-ui/main/project-03-light.svg">
+  <img alt="03 — Loan Approval Prediction · Machine Learning. Classical classifiers benchmarked on a realistic credit decision, and a reason for why one of them wins. Stack: Python, Logistic Regression, KNN, Gaussian NB, scikit-learn. Three model families compared, imbalance handled explicitly." src="https://raw.githubusercontent.com/codewithvikas96-ui/codewithvikas96-ui/main/project-03-light.svg">
+</picture>
 
 **What it does**
 - Cleans applicant data and engineers features from income, credit and asset fields
@@ -160,10 +164,11 @@ background with model work.
 
 <br/>
 
-> **Purpose** — Model medical insurance costs and identify which applicant attributes
-> actually drive the premium.
-
-**Stack** `Python` · `Regression` · `scikit-learn` · `Pandas` · `Seaborn`
+<picture>
+  <source media="(prefers-color-scheme: dark)"  srcset="https://raw.githubusercontent.com/codewithvikas96-ui/codewithvikas96-ui/main/project-04-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/codewithvikas96-ui/codewithvikas96-ui/main/project-04-light.svg">
+  <img alt="04 — Insurance Charges Prediction · Regression. Models medical insurance cost and identifies which applicant attributes actually drive the premium. Stack: Python, Regression, scikit-learn, Pandas, Seaborn. Engineered BMI and age bands, correlation-led modelling." src="https://raw.githubusercontent.com/codewithvikas96-ui/codewithvikas96-ui/main/project-04-light.svg">
+</picture>
 
 **What it does**
 - Derives BMI categories and age groups from continuous variables
@@ -184,10 +189,11 @@ background with model work.
 
 <br/>
 
-> **Purpose** — Connect students with local service providers through a single
-> full-stack platform. Built and shipped under hackathon time pressure — and won.
-
-**Stack** Full-stack web application · Modern web architecture · Backend & database integration
+<picture>
+  <source media="(prefers-color-scheme: dark)"  srcset="https://raw.githubusercontent.com/codewithvikas96-ui/codewithvikas96-ui/main/project-05-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/codewithvikas96-ui/codewithvikas96-ui/main/project-05-light.svg">
+  <img alt="05 — QuickFix Lite · Full-Stack · hackathon winner. Connects students with local service providers through one full-stack platform, built under pressure. Stack: Web, Backend, Database, full-stack architecture. Two-sided platform, shipped in a hackathon window." src="https://raw.githubusercontent.com/codewithvikas96-ui/codewithvikas96-ui/main/project-05-light.svg">
+</picture>
 
 **What it does**
 - Two-sided platform linking students with service providers
@@ -208,10 +214,11 @@ background with model work.
 
 <br/>
 
-> **Purpose** — A production-oriented mobile HR platform with real authentication,
-> role separation and database-level security.
-
-**Stack** `React Native` · `Expo` · `TypeScript` · `Supabase` · `PostgreSQL` · `Edge Functions`
+<picture>
+  <source media="(prefers-color-scheme: dark)"  srcset="https://raw.githubusercontent.com/codewithvikas96-ui/codewithvikas96-ui/main/project-06-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/codewithvikas96-ui/codewithvikas96-ui/main/project-06-light.svg">
+  <img alt="06 — HR Management Application · Mobile · in development. A mobile HR platform with real authentication, role separation and security enforced at the database layer. Stack: React Native, Expo, TypeScript, Supabase, PostgreSQL. Role-based access, Row Level Security at the database layer." src="https://raw.githubusercontent.com/codewithvikas96-ui/codewithvikas96-ui/main/project-06-light.svg">
+</picture>
 
 **What it does**
 - Role-based architecture separating employee and administrator capabilities

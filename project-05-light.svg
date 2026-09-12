@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 212" width="1180" height="212" role="img" aria-label="QuickFix Lite">
+<style>text{user-select:none;}</style>
+<clipPath id="c"><rect x="0.75" y="0.75" width="1178.5" height="210.5" rx="12"/></clipPath>
+<rect x="0.75" y="0.75" width="1178.5" height="210.5" rx="12" fill="#FFFFFF" stroke="#D3DAD3" stroke-width="1.5"/>
+<rect x="0" y="0" width="5" height="212" fill="#B3246B" clip-path="url(#c)"/>
+<text x="40" y="48" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="13" fill="#B3246B" letter-spacing="2">05</text>
+<line x1="70" y1="43" x2="102" y2="43" stroke="#B3246B" stroke-width="1.5" opacity="0.5"/>
+<g transform="translate(1011.5,26)"><rect x="0" y="0" width="128.48" height="24" rx="6" fill="#F7E9F0" stroke="#B3246B" stroke-width="1" opacity="0.95"/><text x="64.24" y="16" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="11" fill="#B3246B" text-anchor="middle">hackathon winner</text></g>
+<g transform="translate(913.0,26)"><rect x="0" y="0" width="88.55" height="24" rx="6" fill="#F4F4F4" stroke="#8C968F" stroke-width="1" opacity="0.95"/><text x="44.275" y="16" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="11" fill="#8C968F" text-anchor="middle">Full-Stack</text></g>
+<text x="40" y="92" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="25" fill="#10151B">QuickFix Lite</text>
+<text x="40" y="120" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="13" fill="#5B6660">Connects students with local service providers through one full-stack platform, built under pressure.</text>
+<rect x="40" y="146" width="43.78" height="24" rx="6" fill="#F0F3F0" stroke="#8C968F" stroke-width="1" opacity="0.95"/><text x="61.89" y="162" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12" fill="#8C968F" text-anchor="middle">Web</text>
+<rect x="91.78" y="146" width="72.82" height="24" rx="6" fill="#F0F3F0" stroke="#8C968F" stroke-width="1" opacity="0.95"/><text x="128.19" y="162" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12" fill="#8C968F" text-anchor="middle">Backend</text>
+<rect x="172.6" y="146" width="80.08" height="24" rx="6" fill="#F0F3F0" stroke="#8C968F" stroke-width="1" opacity="0.95"/><text x="212.64" y="162" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12" fill="#8C968F" text-anchor="middle">Database</text>
+<rect x="260.68" y="146" width="188.98" height="24" rx="6" fill="#F0F3F0" stroke="#8C968F" stroke-width="1" opacity="0.95"/><text x="355.17" y="162" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12" fill="#8C968F" text-anchor="middle">Full-stack architecture</text>
+<text x="40" y="194" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#B3246B" opacity="0.9">two-sided platform  ·  shipped in a hackathon window</text>
+<line x1="926.0" y1="62.0" x2="1020.0" y2="110.0" stroke="#B3246B" stroke-width="1.6" opacity="0.4"/>
+<circle cx="926.0" cy="62.0" r="5.5" fill="#FFFFFF" stroke="#B3246B" stroke-width="2"/>
+<circle cx="926.0" cy="62.0" r="2.4" fill="#B3246B" opacity="0"><animate attributeName="opacity" values="0;1;0" dur="2.6s" begin="0.00s" repeatCount="indefinite"/></circle>
+<line x1="926.0" y1="110.0" x2="1020.0" y2="110.0" stroke="#B3246B" stroke-width="1.6" opacity="0.4"/>
+<circle cx="926.0" cy="110.0" r="5.5" fill="#FFFFFF" stroke="#B3246B" stroke-width="2"/>
+<circle cx="926.0" cy="110.0" r="2.4" fill="#B3246B" opacity="0"><animate attributeName="opacity" values="0;1;0" dur="2.6s" begin="0.35s" repeatCount="indefinite"/></circle>
+<line x1="926.0" y1="158.0" x2="1020.0" y2="110.0" stroke="#B3246B" stroke-width="1.6" opacity="0.4"/>
+<circle cx="926.0" cy="158.0" r="5.5" fill="#FFFFFF" stroke="#B3246B" stroke-width="2"/>
+<circle cx="926.0" cy="158.0" r="2.4" fill="#B3246B" opacity="0"><animate attributeName="opacity" values="0;1;0" dur="2.6s" begin="0.70s" repeatCount="indefinite"/></circle>
+<line x1="1114.0" y1="62.0" x2="1020.0" y2="110.0" stroke="#B3246B" stroke-width="1.6" opacity="0.4"/>
+<circle cx="1114.0" cy="62.0" r="5.5" fill="#FFFFFF" stroke="#B3246B" stroke-width="2"/>
+<circle cx="1114.0" cy="62.0" r="2.4" fill="#B3246B" opacity="0"><animate attributeName="opacity" values="0;1;0" dur="2.6s" begin="1.05s" repeatCount="indefinite"/></circle>
+<line x1="1114.0" y1="110.0" x2="1020.0" y2="110.0" stroke="#B3246B" stroke-width="1.6" opacity="0.4"/>
+<circle cx="1114.0" cy="110.0" r="5.5" fill="#FFFFFF" stroke="#B3246B" stroke-width="2"/>
+<circle cx="1114.0" cy="110.0" r="2.4" fill="#B3246B" opacity="0"><animate attributeName="opacity" values="0;1;0" dur="2.6s" begin="1.40s" repeatCount="indefinite"/></circle>
+<line x1="1114.0" y1="158.0" x2="1020.0" y2="110.0" stroke="#B3246B" stroke-width="1.6" opacity="0.4"/>
+<circle cx="1114.0" cy="158.0" r="5.5" fill="#FFFFFF" stroke="#B3246B" stroke-width="2"/>
+<circle cx="1114.0" cy="158.0" r="2.4" fill="#B3246B" opacity="0"><animate attributeName="opacity" values="0;1;0" dur="2.6s" begin="1.75s" repeatCount="indefinite"/></circle>
+<rect x="1007.0" y="97.0" width="26" height="26" rx="7" fill="#B3246B"/>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 212" width="1180" height="212" role="img" aria-label="HR Management Application">
+<style>text{user-select:none;}</style>
+<clipPath id="c"><rect x="0.75" y="0.75" width="1178.5" height="210.5" rx="12"/></clipPath>
+<rect x="0.75" y="0.75" width="1178.5" height="210.5" rx="12" fill="#FFFFFF" stroke="#D3DAD3" stroke-width="1.5"/>
+<rect x="0" y="0" width="5" height="212" fill="#1D4ED8" clip-path="url(#c)"/>
+<text x="40" y="48" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="13" fill="#1D4ED8" letter-spacing="2">06</text>
+<line x1="70" y1="43" x2="102" y2="43" stroke="#1D4ED8" stroke-width="1.5" opacity="0.5"/>
+<g transform="translate(1024.8,26)"><rect x="0" y="0" width="115.16999999999999" height="24" rx="6" fill="#F8F1E8" stroke="#B4751A" stroke-width="1" opacity="0.95"/><text x="57.584999999999994" y="16" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="11" fill="#B4751A" text-anchor="middle">in development</text></g>
+<g transform="translate(952.9,26)"><rect x="0" y="0" width="61.92999999999999" height="24" rx="6" fill="#F4F4F4" stroke="#8C968F" stroke-width="1" opacity="0.95"/><text x="30.964999999999996" y="16" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="11" fill="#8C968F" text-anchor="middle">Mobile</text></g>
+<text x="40" y="92" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="25" fill="#10151B">HR Management Application</text>
+<text x="40" y="120" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="13" fill="#5B6660">A mobile HR platform with real authentication, role separation and security enforced at the database layer.</text>
+<rect x="40" y="146" width="109.12" height="24" rx="6" fill="#F0F3F0" stroke="#8C968F" stroke-width="1" opacity="0.95"/><text x="94.56" y="162" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12" fill="#8C968F" text-anchor="middle">React Native</text>
+<rect x="157.12" y="146" width="51.04" height="24" rx="6" fill="#F0F3F0" stroke="#8C968F" stroke-width="1" opacity="0.95"/><text x="182.64000000000001" y="162" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12" fill="#8C968F" text-anchor="middle">Expo</text>
+<rect x="216.16" y="146" width="94.6" height="24" rx="6" fill="#F0F3F0" stroke="#8C968F" stroke-width="1" opacity="0.95"/><text x="263.46" y="162" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12" fill="#8C968F" text-anchor="middle">TypeScript</text>
+<rect x="318.76" y="146" width="80.08" height="24" rx="6" fill="#F0F3F0" stroke="#8C968F" stroke-width="1" opacity="0.95"/><text x="358.8" y="162" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12" fill="#8C968F" text-anchor="middle">Supabase</text>
+<rect x="406.84" y="146" width="94.6" height="24" rx="6" fill="#F0F3F0" stroke="#8C968F" stroke-width="1" opacity="0.95"/><text x="454.14" y="162" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12" fill="#8C968F" text-anchor="middle">PostgreSQL</text>
+<text x="40" y="194" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#1D4ED8" opacity="0.9">role-based access  ·  Row Level Security at the DB layer</text>
+<rect x="989.84" y="52" width="60.32" height="116" rx="9" fill="#E8EDFB" stroke="#1D4ED8" stroke-width="2"/>
+<rect x="1009.1424000000001" y="57" width="21.7152" height="3.5" rx="2" fill="#1D4ED8" opacity="0.7"/>
+<rect x="997.84" y="68" width="44.32" height="13" rx="3" fill="#1D4ED8" opacity="0.75"/>
+<rect x="997.84" y="88" width="9" height="9" rx="2.5" fill="#1D4ED8" opacity="0.85"/>
+<rect x="1011.84" y="90" width="28.32" height="5" rx="2.5" fill="#1D4ED8" opacity="0.35"/>
+<rect x="997.84" y="103" width="9" height="9" rx="2.5" fill="#1D4ED8" opacity="0.85"/>
+<rect x="1011.84" y="105" width="28.32" height="5" rx="2.5" fill="#1D4ED8" opacity="0.35"/>
+<rect x="997.84" y="118" width="9" height="9" rx="2.5" fill="#1D4ED8" opacity="0.85"/>
+<rect x="1011.84" y="120" width="28.32" height="5" rx="2.5" fill="#1D4ED8" opacity="0.35"/>
+<rect x="1030.2" y="142.0" width="14" height="11" rx="2.5" fill="#1D4ED8"/>
+<path d="M1033.7 142.0 v-4 a3.5 3.5 0 0 1 7 0 v4" fill="none" stroke="#1D4ED8" stroke-width="2"/>
+</svg>

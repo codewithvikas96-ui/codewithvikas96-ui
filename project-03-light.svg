@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 212" width="1180" height="212" role="img" aria-label="Loan Approval Prediction">
+<style>text{user-select:none;}</style>
+<clipPath id="c"><rect x="0.75" y="0.75" width="1178.5" height="210.5" rx="12"/></clipPath>
+<rect x="0.75" y="0.75" width="1178.5" height="210.5" rx="12" fill="#FFFFFF" stroke="#D3DAD3" stroke-width="1.5"/>
+<rect x="0" y="0" width="5" height="212" fill="#6D3DBF" clip-path="url(#c)"/>
+<text x="40" y="48" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="13" fill="#6D3DBF" letter-spacing="2">03</text>
+<line x1="70" y1="43" x2="102" y2="43" stroke="#6D3DBF" stroke-width="1.5" opacity="0.5"/>
+<g transform="translate(1011.5,26)"><rect x="0" y="0" width="128.48" height="24" rx="6" fill="#F4F4F4" stroke="#8C968F" stroke-width="1" opacity="0.95"/><text x="64.24" y="16" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="11" fill="#8C968F" text-anchor="middle">Machine Learning</text></g>
+<text x="40" y="92" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="25" fill="#10151B">Loan Approval Prediction</text>
+<text x="40" y="120" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="13" fill="#5B6660">Classical classifiers benchmarked on a realistic credit decision — and a reason for why one of them wins.</text>
+<rect x="40" y="146" width="65.56" height="24" rx="6" fill="#F0F3F0" stroke="#8C968F" stroke-width="1" opacity="0.95"/><text x="72.78" y="162" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12" fill="#8C968F" text-anchor="middle">Python</text>
+<rect x="113.56" y="146" width="159.94" height="24" rx="6" fill="#F0F3F0" stroke="#8C968F" stroke-width="1" opacity="0.95"/><text x="193.53" y="162" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12" fill="#8C968F" text-anchor="middle">Logistic Regression</text>
+<rect x="281.5" y="146" width="43.78" height="24" rx="6" fill="#F0F3F0" stroke="#8C968F" stroke-width="1" opacity="0.95"/><text x="303.39" y="162" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12" fill="#8C968F" text-anchor="middle">KNN</text>
+<rect x="333.28" y="146" width="101.86" height="24" rx="6" fill="#F0F3F0" stroke="#8C968F" stroke-width="1" opacity="0.95"/><text x="384.21" y="162" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12" fill="#8C968F" text-anchor="middle">Gaussian NB</text>
+<rect x="443.14" y="146" width="109.12" height="24" rx="6" fill="#F0F3F0" stroke="#8C968F" stroke-width="1" opacity="0.95"/><text x="497.7" y="162" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12" fill="#8C968F" text-anchor="middle">scikit-learn</text>
+<text x="40" y="194" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#6D3DBF" opacity="0.9">3 model families compared  ·  imbalance handled explicitly</text>
+<rect x="962.0" y="52.0" width="55.0" height="55.0" rx="3" fill="#6D3DBF" opacity="0.92"><animate attributeName="opacity" values="0;0.92" dur="0.4s" begin="0.0s" fill="freeze"/></rect>
+<rect x="1023.0" y="52.0" width="55.0" height="55.0" rx="3" fill="#6D3DBF" opacity="0.16"><animate attributeName="opacity" values="0;0.16" dur="0.4s" begin="0.1s" fill="freeze"/></rect>
+<rect x="962.0" y="113.0" width="55.0" height="55.0" rx="3" fill="#6D3DBF" opacity="0.2"><animate attributeName="opacity" values="0;0.2" dur="0.4s" begin="0.2s" fill="freeze"/></rect>
+<rect x="1023.0" y="113.0" width="55.0" height="55.0" rx="3" fill="#6D3DBF" opacity="0.82"><animate attributeName="opacity" values="0;0.82" dur="0.4s" begin="0.3s" fill="freeze"/></rect>
+<line x1="954.0" y1="52" x2="954.0" y2="168" stroke="#D3DAD3" stroke-width="1.5"/>
+<line x1="962.0" y1="176" x2="1078.0" y2="176" stroke="#D3DAD3" stroke-width="1.5"/>
+</svg>
