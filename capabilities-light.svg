@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 522" width="1180" height="522" role="img" aria-label="Capability report">
+<style>text{user-select:none;}</style>
+<rect x="0.75" y="0.75" width="1178.5" height="520.5" rx="12" fill="#FFFFFF" stroke="#D3DAD3" stroke-width="1.5"/>
+<text x="40" y="46" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12" fill="#1E7D4F" letter-spacing="1.8">CAPABILITY REPORT</text>
+<text x="1140" y="46" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="11" fill="#8C968F" text-anchor="end">self-assessed · project-backed</text>
+<line x1="40" y1="58" x2="1140" y2="58" stroke="#D3DAD3" stroke-width="1"/>
+<g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.01s" begin="0.12s" fill="freeze"/>
+<rect x="40" y="92" width="1100" height="30" rx="6" fill="#E4EFEA"/>
+<rect x="40" y="92" width="3.5" height="30" rx="1.8" fill="#1E7D4F" opacity="0.9"/>
+<rect x="60" y="97" width="100" height="20" rx="10" fill="#DBEAE3" stroke="#1E7D4F" stroke-width="1" opacity="0.95"/><text x="110.0" y="111" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="10" fill="#1E7D4F" text-anchor="middle" letter-spacing="1.1">ONLINE</text>
+<text x="182" y="112" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="14" fill="#10151B">Python</text>
+<text x="470" y="112" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#5B6660">core language · daily driver</text>
+<rect x="940" y="104" width="200" height="6" rx="3" fill="#8C968F" opacity="0.22"/>
+<rect x="940" y="104" width="200" height="6" rx="3" fill="#1E7D4F" opacity="0.9"/>
+</g>
+<g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.01s" begin="0.19s" fill="freeze"/>
+<rect x="40" y="126" width="1100" height="30" rx="6" fill="#E4EFEA"/>
+<rect x="40" y="126" width="3.5" height="30" rx="1.8" fill="#1E7D4F" opacity="0.9"/>
+<rect x="60" y="131" width="100" height="20" rx="10" fill="#DBEAE3" stroke="#1E7D4F" stroke-width="1" opacity="0.95"/><text x="110.0" y="145" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="10" fill="#1E7D4F" text-anchor="middle" letter-spacing="1.1">ONLINE</text>
+<text x="182" y="146" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="14" fill="#10151B">Mathematics &amp; Statistics</text>
+<text x="470" y="146" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#5B6660">linear algebra · probability · inference</text>
+<rect x="940" y="138" width="200" height="6" rx="3" fill="#8C968F" opacity="0.22"/>
+<rect x="940" y="138" width="200" height="6" rx="3" fill="#1E7D4F" opacity="0.9"/>
+</g>
+<g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.01s" begin="0.26s" fill="freeze"/>
+<rect x="40" y="160" width="1100" height="30" rx="6" fill="#E4EFEA"/>
+<rect x="40" y="160" width="3.5" height="30" rx="1.8" fill="#1E7D4F" opacity="0.9"/>
+<rect x="60" y="165" width="100" height="20" rx="10" fill="#DBEAE3" stroke="#1E7D4F" stroke-width="1" opacity="0.95"/><text x="110.0" y="179" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="10" fill="#1E7D4F" text-anchor="middle" letter-spacing="1.1">ONLINE</text>
+<text x="182" y="180" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="14" fill="#10151B">Data Analysis / EDA</text>
+<text x="470" y="180" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#5B6660">NumPy · Pandas · Matplotlib · Seaborn</text>
+<rect x="940" y="172" width="200" height="6" rx="3" fill="#8C968F" opacity="0.22"/>
+<rect x="940" y="172" width="200" height="6" rx="3" fill="#1E7D4F" opacity="0.9"/>
+</g>
+<g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.01s" begin="0.33s" fill="freeze"/>
+<rect x="40" y="194" width="1100" height="30" rx="6" fill="#E4EFEA"/>
+<rect x="40" y="194" width="3.5" height="30" rx="1.8" fill="#1E7D4F" opacity="0.9"/>
+<rect x="60" y="199" width="100" height="20" rx="10" fill="#DBEAE3" stroke="#1E7D4F" stroke-width="1" opacity="0.95"/><text x="110.0" y="213" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="10" fill="#1E7D4F" text-anchor="middle" letter-spacing="1.1">ONLINE</text>
+<text x="182" y="214" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="14" fill="#10151B">Classical Machine Learning</text>
+<text x="470" y="214" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#5B6660">scikit-learn · boosting · clustering</text>
+<rect x="940" y="206" width="200" height="6" rx="3" fill="#8C968F" opacity="0.22"/>
+<rect x="940" y="206" width="200" height="6" rx="3" fill="#1E7D4F" opacity="0.9"/>
+</g>
+<g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.01s" begin="0.4s" fill="freeze"/>
+<rect x="40" y="228" width="1100" height="30" rx="6" fill="#E4EFEA"/>
+<rect x="40" y="228" width="3.5" height="30" rx="1.8" fill="#1E7D4F" opacity="0.9"/>
+<rect x="60" y="233" width="100" height="20" rx="10" fill="#DBEAE3" stroke="#1E7D4F" stroke-width="1" opacity="0.95"/><text x="110.0" y="247" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="10" fill="#1E7D4F" text-anchor="middle" letter-spacing="1.1">ONLINE</text>
+<text x="182" y="248" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="14" fill="#10151B">Software Engineering</text>
+<text x="470" y="248" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#5B6660">full-stack web · mobile · databases</text>
+<rect x="940" y="240" width="200" height="6" rx="3" fill="#8C968F" opacity="0.22"/>
+<rect x="940" y="240" width="200" height="6" rx="3" fill="#1E7D4F" opacity="0.9"/>
+</g>
+<g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.01s" begin="0.47s" fill="freeze"/>
+<rect x="40" y="276" width="1100" height="30" rx="6" fill="#F6EEE4"/>
+<rect x="40" y="276" width="3.5" height="30" rx="1.8" fill="#B4751A" opacity="0.9"/>
+<rect x="60" y="281" width="100" height="20" rx="10" fill="#F3E9DA" stroke="#B4751A" stroke-width="1" opacity="0.95"/><text x="110.0" y="295" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="10" fill="#B4751A" text-anchor="middle" letter-spacing="1.1">LOADING</text>
+<text x="182" y="296" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="14" fill="#10151B">Deep Learning</text>
+<text x="470" y="296" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#5B6660">neural nets · backprop · architectures</text>
+<rect x="940" y="288" width="200" height="6" rx="3" fill="#8C968F" opacity="0.22"/>
+</g>
+<g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.01s" begin="0.54s" fill="freeze"/>
+<rect x="40" y="310" width="1100" height="30" rx="6" fill="#F6EEE4"/>
+<rect x="40" y="310" width="3.5" height="30" rx="1.8" fill="#B4751A" opacity="0.9"/>
+<rect x="60" y="315" width="100" height="20" rx="10" fill="#F3E9DA" stroke="#B4751A" stroke-width="1" opacity="0.95"/><text x="110.0" y="329" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="10" fill="#B4751A" text-anchor="middle" letter-spacing="1.1">LOADING</text>
+<text x="182" y="330" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="14" fill="#10151B">Natural Language Processing</text>
+<text x="470" y="330" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#5B6660">text pipelines · embeddings</text>
+<rect x="940" y="322" width="200" height="6" rx="3" fill="#8C968F" opacity="0.22"/>
+</g>
+<g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.01s" begin="0.61s" fill="freeze"/>
+<rect x="40" y="358" width="1100" height="30" rx="6" fill="#F9FAF9"/>
+<rect x="40" y="358" width="3.5" height="30" rx="1.8" fill="#8C968F" opacity="0.9"/>
+<rect x="60" y="363" width="100" height="20" rx="10" fill="#EDEEED" stroke="#8C968F" stroke-width="1" opacity="0.95"/><text x="110.0" y="377" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="10" fill="#8C968F" text-anchor="middle" letter-spacing="1.1">QUEUED</text>
+<text x="182" y="378" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="14" fill="#10151B">Generative AI</text>
+<text x="470" y="378" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#5B6660">LLM application patterns · RAG</text>
+<rect x="940" y="370" width="200" height="6" rx="3" fill="#8C968F" opacity="0.22"/>
+</g>
+<g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.01s" begin="0.68s" fill="freeze"/>
+<rect x="40" y="392" width="1100" height="30" rx="6" fill="#F9FAF9"/>
+<rect x="40" y="392" width="3.5" height="30" rx="1.8" fill="#8C968F" opacity="0.9"/>
+<rect x="60" y="397" width="100" height="20" rx="10" fill="#EDEEED" stroke="#8C968F" stroke-width="1" opacity="0.95"/><text x="110.0" y="411" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="10" fill="#8C968F" text-anchor="middle" letter-spacing="1.1">QUEUED</text>
+<text x="182" y="412" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="14" fill="#10151B">AI Agents</text>
+<text x="470" y="412" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#5B6660">tool use · planning loops</text>
+<rect x="940" y="404" width="200" height="6" rx="3" fill="#8C968F" opacity="0.22"/>
+</g>
+<g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.01s" begin="0.75s" fill="freeze"/>
+<rect x="40" y="426" width="1100" height="30" rx="6" fill="#F9FAF9"/>
+<rect x="40" y="426" width="3.5" height="30" rx="1.8" fill="#8C968F" opacity="0.9"/>
+<rect x="60" y="431" width="100" height="20" rx="10" fill="#EDEEED" stroke="#8C968F" stroke-width="1" opacity="0.95"/><text x="110.0" y="445" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="10" fill="#8C968F" text-anchor="middle" letter-spacing="1.1">QUEUED</text>
+<text x="182" y="446" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="14" fill="#10151B">Production AI Systems</text>
+<text x="470" y="446" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#5B6660">serving · monitoring · MLOps</text>
+<rect x="940" y="438" width="200" height="6" rx="3" fill="#8C968F" opacity="0.22"/>
+</g>
+<clipPath id="bars"><rect x="940" y="288" width="200" height="6" rx="3" fill="#000"/><rect x="940" y="322" width="200" height="6" rx="3" fill="#000"/></clipPath>
+<g clip-path="url(#bars)">
+<rect x="940" y="288" width="70" height="6" rx="3" fill="#B4751A" opacity="0.95"><animateTransform attributeName="transform" type="translate" values="-80,0;210,0" dur="2.1s" repeatCount="indefinite"/></rect>
+<rect x="940" y="322" width="70" height="6" rx="3" fill="#B4751A" opacity="0.95"><animateTransform attributeName="transform" type="translate" values="-80,0;210,0" dur="2.1s" repeatCount="indefinite"/></rect>
+</g>
+<rect x="40" y="480" width="10" height="10" rx="3" fill="#1E7D4F" opacity="0.9"/>
+<text x="58" y="489" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="11" fill="#8C968F">proven in shipped projects</text>
+<rect x="273.03" y="480" width="10" height="10" rx="3" fill="#B4751A" opacity="0.9"/>
+<text x="291.03" y="489" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="11" fill="#8C968F">actively learning</text>
+<rect x="446.16499999999996" y="480" width="10" height="10" rx="3" fill="#8C968F" opacity="0.9"/>
+<text x="464.16499999999996" y="489" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="11" fill="#8C968F">queued next</text>
+</svg>

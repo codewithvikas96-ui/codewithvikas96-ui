@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 288" width="1180" height="288" role="img" aria-label="Role trajectory">
+<style>text{user-select:none;}</style>
+<rect x="0.75" y="0.75" width="1178.5" height="286.5" rx="12" fill="#0B0F14" stroke="#1B2430" stroke-width="1.5"/>
+<text x="40" y="46" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12" fill="#4D9EFF" letter-spacing="1.8">ROLE TRAJECTORY</text>
+<text x="1140" y="46" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="11" fill="#4E5A68" text-anchor="end">developer → AI engineer</text>
+<line x1="40" y1="58" x2="1140" y2="58" stroke="#1B2430" stroke-width="1"/>
+<g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.01s" begin="0.15s" fill="freeze"/>
+<rect x="40.0" y="92" width="255.5" height="104" rx="10" fill="#0F221F" stroke="#3BE08A" stroke-width="1.5"/>
+<text x="58.0" y="120" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="11" fill="#4E5A68" letter-spacing="1.4">00</text>
+<text x="58.0" y="150" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="16" fill="#E6EDF3">Developer</text>
+<rect x="58.0" y="162" width="92" height="20" rx="10" fill="#133027" stroke="#3BE08A" stroke-width="1" opacity="0.95"/><text x="104.0" y="176" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="10" fill="#3BE08A" text-anchor="middle" letter-spacing="1.1">current</text>
+</g>
+<polyline points="304.5,138.0 311.5,144.0 304.5,150.0" fill="none" stroke="#4E5A68" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+<g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.01s" begin="0.27s" fill="freeze"/>
+<rect x="321.5" y="92" width="255.5" height="104" rx="10" fill="#1F1C18" stroke="#E8A33D" stroke-width="1.5"/>
+<text x="339.5" y="120" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="11" fill="#4E5A68" letter-spacing="1.4">01</text>
+<text x="339.5" y="150" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="16" fill="#E6EDF3">Data Scientist</text>
+<rect x="339.5" y="162" width="92" height="20" rx="10" fill="#2E271B" stroke="#E8A33D" stroke-width="1" opacity="0.95"/><text x="385.5" y="176" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="10" fill="#E8A33D" text-anchor="middle" letter-spacing="1.1">in-flight</text>
+<rect x="321.5" y="92" width="255.5" height="104" rx="10" fill="none" stroke="#E8A33D" stroke-width="1.5" opacity="0"><animate attributeName="opacity" values="0;0.85;0" dur="2.4s" repeatCount="indefinite"/></rect>
+</g>
+<polyline points="586.0,138.0 593.0,144.0 586.0,150.0" fill="none" stroke="#4E5A68" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+<g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.01s" begin="0.39s" fill="freeze"/>
+<rect x="603.0" y="92" width="255.5" height="104" rx="10" fill="#11161C" stroke="#1B2430" stroke-width="1"/>
+<text x="621.0" y="120" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="11" fill="#4E5A68" letter-spacing="1.4">02</text>
+<text x="621.0" y="150" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="16" fill="#E6EDF3">ML Engineer</text>
+<rect x="621.0" y="162" width="92" height="20" rx="10" fill="#161B21" stroke="#4E5A68" stroke-width="1" opacity="0.95"/><text x="667.0" y="176" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="10" fill="#4E5A68" text-anchor="middle" letter-spacing="1.1">next</text>
+</g>
+<polyline points="867.5,138.0 874.5,144.0 867.5,150.0" fill="none" stroke="#4E5A68" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+<g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.01s" begin="0.51s" fill="freeze"/>
+<rect x="884.5" y="92" width="255.5" height="104" rx="10" fill="#21131F" stroke="#1B2430" stroke-width="1"/>
+<text x="902.5" y="120" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="11" fill="#4E5A68" letter-spacing="1.4">03</text>
+<text x="902.5" y="150" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="16" fill="#E6EDF3">AI Engineer</text>
+<rect x="902.5" y="162" width="92" height="20" rx="10" fill="#321627" stroke="#FF3D8A" stroke-width="1" opacity="0.95"/><text x="948.5" y="176" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="10" fill="#FF3D8A" text-anchor="middle" letter-spacing="1.1">target</text>
+</g>
+<text x="40" y="236" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12" fill="#4E5A68">note: this is a roadmap, not a résumé.</text>
+<text x="92" y="258" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="12" fill="#4E5A68">each stage is earned by shipping, not by reading.</text>
+</svg>
