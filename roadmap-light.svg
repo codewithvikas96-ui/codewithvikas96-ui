@@ -64,5 +64,5 @@
 <text x="140.62" y="257" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="11" fill="#8C968F">in progress</text>
 <rect x="251.825" y="248" width="10" height="10" rx="3" fill="#8C968F" opacity="0.9"/>
 <text x="269.825" y="257" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="11" fill="#8C968F">queued</text>
-<text x="1140" y="257" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="11" fill="#8C968F" text-anchor="end">each stage is earned by shipping</text>
+<text x="1140" y="257" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="11" fill="#8C968F" text-anchor="end">current focus · Deep Learning → NLP</text>
 </svg>

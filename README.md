@@ -5,7 +5,8 @@
 
     generate_banner.py    -> dark.svg / light.svg              (hero)
     generate_sections.py  -> capabilities / trajectory /       (sections
-                             roadmap / buildlog -dark|-light    01, 02, 04, 06)
+                             roadmap / buildlog / quote         01, 02, 04, 06
+                             -dark|-light                       + the sign-off)
     generate_projects.py  -> project-01..06-dark|-light        (section 03)
 
   Both section scripts import their palette and helpers from generate_banner.py,
@@ -376,6 +377,12 @@ background with model work.
 ```
 
 ---
+
+<picture>
+  <source media="(prefers-color-scheme: dark)"  srcset="https://raw.githubusercontent.com/codewithvikas96-ui/codewithvikas96-ui/main/quote-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/codewithvikas96-ui/codewithvikas96-ui/main/quote-light.svg">
+  <img alt="Terminal typing out: &quot;The purpose of computing is insight, not numbers.&quot; — Richard W. Hamming, Numerical Methods for Scientists and Engineers, 1962" src="https://raw.githubusercontent.com/codewithvikas96-ui/codewithvikas96-ui/main/quote-light.svg">
+</picture>
 
 <div align="center">
 

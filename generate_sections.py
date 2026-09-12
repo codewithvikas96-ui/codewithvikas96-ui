@@ -13,6 +13,7 @@ as one continuous terminal session instead of a hero followed by a plain README.
   trajectory-{dark,light}.svg     section 02  ROLE TRAJECTORY
   roadmap-{dark,light}.svg        section 04  LEARNING ROADMAP
   buildlog-{dark,light}.svg       section 06  BUILD LOG
+  quote-{dark,light}.svg          closing     a typed-out quote
 
 Prose stays in markdown on purpose — it has to stay searchable, copyable and
 readable by a screen reader. Only the chrome and the diagrams move to SVG.
@@ -58,6 +59,10 @@ STAGES = [
     ("07", "Production AI",        "queued"),
 ]
 
+QUOTE = "The purpose of computing is insight, not numbers."
+QUOTE_BY = "Richard W. Hamming · Numerical Methods for Scientists and Engineers, 1962"
+QUOTE_CMD = "cat ~/.philosophy"
+
 BUILD = [
     ("ml",   "comparing boosting families — XGBoost vs LightGBM vs CatBoost", "green"),
     ("dl",   "implementing backpropagation by hand before trusting a framework", "amber"),
@@ -99,6 +104,80 @@ def pill(x, y, w, label, col, t, size=10):
                  op=0.95)
             + text(x + w / 2, y + 14, label, col, size=size, anchor="middle",
                    ls=1.1))
+
+
+# ------------------------------------------------------- terminal window
+
+def window(h, title, t, alt):
+    """The hero's own window chrome — traffic lights, rule, accent seam."""
+    bar = 36
+    o = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {PW} {h}" '
+         f'width="{PW}" height="{h}" role="img" aria-label="{esc(alt)}">',
+         "<style>text{user-select:none;}</style>",
+         rect(0.75, 0.75, PW - 1.5, h - 1.5, t["panel"], t["border"], rx=10, sw=1.5),
+         line(0, bar, PW, bar, t["border"], 1)]
+    for i, c in enumerate(("#FF5F56", "#FFBD2E", "#27C93F")):
+        o.append(f'<circle cx="{30 + i * 20}" cy="{bar / 2}" r="6" fill="{c}"/>')
+    o.append(text(PW / 2, bar / 2 + 4, title, t["text"], size=13, anchor="middle"))
+    o.append('<linearGradient id="seam" x1="0" y1="0" x2="1" y2="0">'
+             f'<stop offset="0%" stop-color="{t["green"]}"/>'
+             f'<stop offset="30%" stop-color="{t["cyan"]}"/>'
+             f'<stop offset="60%" stop-color="{t["magenta"]}"/>'
+             f'<stop offset="82%" stop-color="{t["violet"]}"/>'
+             f'<stop offset="100%" stop-color="{t["amber"]}"/></linearGradient>')
+    o.append(rect(0, bar, PW, 1.5, "url(#seam)", op=0.7))
+    return o
+
+
+def shows(at, clear, cyc):
+    """Cut in at `at`, cut out at `clear` — no fade, like a terminal."""
+    return ('<animate attributeName="opacity" values="0;1;0;0" '
+            f'keyTimes="0;{at / cyc:.4f};{clear / cyc:.4f};1" '
+            f'calcMode="discrete" dur="{cyc}s" repeatCount="indefinite"/>')
+
+
+def fades(at, dur, clear, cyc):
+    return ('<animate attributeName="opacity" values="0;0;1;1;0;0" '
+            f'keyTimes="0;{at / cyc:.4f};{(at + dur) / cyc:.4f};'
+            f'{clear / cyc:.4f};{(clear + 0.3) / cyc:.4f};1" '
+            f'dur="{cyc}s" repeatCount="indefinite"/>')
+
+
+def _steps(n, t0, t1, clear, cyc):
+    """keyTimes for one character-per-step typing, then a wipe."""
+    return ["0"] + [f"{(t0 + (t1 - t0) * i / n) / cyc:.4f}" for i in range(1, n + 1)] \
+        + [f"{clear / cyc:.4f}", "1"]
+
+
+def typed(s, x, y, size, fill, t0, t1, clear, cyc, cid):
+    """Reveal `s` one character at a time.
+
+    A clip rectangle widens by exactly one character advance per step, so the
+    glyphs are never scaled or slid — they simply arrive, the way they do when
+    someone is actually typing. Monospace makes the arithmetic exact.
+    """
+    n = len(s)
+    vals = ["0"] + [f"{i * adv(size):.1f}" for i in range(1, n + 1)] + ["0", "0"]
+    return (f'<clipPath id="{cid}"><rect x="{x}" y="{y - size}" width="0" '
+            f'height="{size * 1.4:.0f}">'
+            f'<animate attributeName="width" values="{";".join(vals)}" '
+            f'keyTimes="{";".join(_steps(n, t0, t1, clear, cyc))}" '
+            f'calcMode="discrete" dur="{cyc}s" repeatCount="indefinite"/>'
+            f'</rect></clipPath>'
+            f'<g clip-path="url(#{cid})">{text(x, y, s, fill, size=size)}</g>')
+
+
+def caret(s, x, y, size, col, t0, t1, clear, cyc):
+    """The cursor that walks along behind the characters being typed."""
+    n = len(s)
+    xs = [f"{x:.1f}"] + [f"{x + i * adv(size):.1f}" for i in range(1, n + 1)] \
+        + [f"{x:.1f}", f"{x:.1f}"]
+    return (f'<rect x="{x}" y="{y - size + 2:.0f}" width="{adv(size):.1f}" '
+            f'height="{size:.0f}" fill="{col}" opacity="0">'
+            f'<animate attributeName="x" values="{";".join(xs)}" '
+            f'keyTimes="{";".join(_steps(n, t0, t1, clear, cyc))}" '
+            f'calcMode="discrete" dur="{cyc}s" repeatCount="indefinite"/>'
+            f'{shows(t0, t1 + 0.25, cyc)}</rect>')
 
 
 # ------------------------------------------------------------- panels
@@ -302,11 +381,49 @@ def buildlog(t):
                           accent, t, "Build log") + body + ["</svg>"])
 
 
+def quote(t):
+    """Closing panel — a terminal session that types out one line worth keeping.
+
+    The whole thing loops: the animation fires when the image loads, not when
+    it scrolls into view, so a one-shot reveal would already be over by the
+    time anyone reached the bottom of the page. Fourteen seconds — type, sit,
+    clear, again — means there is always something to catch.
+    """
+    cyc, h, a = 14.0, 290, t["cyan"]
+    clear = 12.4
+    prompt = "vikas@ml-node:~$"
+    px = PAD + 16
+    cx = px + len(prompt) * adv(15) + 9
+
+    o = window(h, "vikas@ml-node: ~", t, f"{QUOTE} — {QUOTE_BY}")
+
+    o.append(f'<g opacity="0">{shows(0.2, clear, cyc)}'
+             + text(px, 92, prompt, t["green"], size=15) + "</g>")
+    o.append(typed(QUOTE_CMD, cx, 92, 15, a, 0.5, 2.3, clear, cyc, "q1"))
+    o.append(caret(QUOTE_CMD, cx, 92, 15, a, 0.5, 2.3, clear, cyc))
+
+    o.append(f'<g opacity="0">{shows(2.7, clear, cyc)}'
+             + rect(px, 132, 3, 34, a, rx=1.5, op=0.8) + "</g>")
+    o.append(typed(f'"{QUOTE}"', px + 18, 158, 24, t["value"],
+                   2.8, 6.1, clear, cyc, "q2"))
+    o.append(f'<g opacity="0">{fades(6.5, 0.6, clear, cyc)}'
+             + text(px + 18, 196, f"— {QUOTE_BY}", t["dim"], size=13.5) + "</g>")
+
+    o.append(f'<g opacity="0">{shows(7.2, clear, cyc)}'
+             + text(px, 250, prompt, t["green"], size=15)
+             + f'<rect x="{cx:.1f}" y="237" width="9" height="15" fill="{a}">'
+             f'<animate attributeName="opacity" values="1;0" dur="1.1s" '
+             f'calcMode="discrete" repeatCount="indefinite"/></rect></g>')
+    o.append("</svg>")
+    return "\n".join(o)
+
+
 PANELS = {
     "capabilities": capabilities,
     "trajectory": trajectory,
     "roadmap": roadmap,
     "buildlog": buildlog,
+    "quote": quote,
 }
 
 
