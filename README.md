@@ -103,7 +103,7 @@ background with model work.
 - Choosing the right chart for the question instead of the prettiest one
 - Moving a notebook from personal exploration to something others can use
 
-[`→ repository`](https://github.com/codewithvikas96-ui/ipl-2022-analysis)
+[`→ repository`](https://github.com/codewithvikas96-ui/IPL-2022-EDA)
 
 </details>
 
@@ -175,7 +175,7 @@ background with model work.
 - Correlation analysis before modelling saves time during it
 - Reading residuals to find where a regression systematically misses
 
-[`→ repository`](https://github.com/codewithvikas96-ui/insurance-charges-prediction)
+[`→ repository`](https://github.com/codewithvikas96-ui/Insurance-Charge-Prediction)
 
 </details>
 
