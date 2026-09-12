@@ -454,20 +454,31 @@ def scene_neuron(t):
     """Scene 3 — a multipolar neuron, drawn the way a biology plate draws one.
 
     Every limb is a tapered filled ribbon: a centreline offset perpendicular by
-    a width that shrinks toward the tip. Soma, dendrites and axon are painted in
-    two passes — a fattened outline, then a fill on top — so the cell reads as
-    one continuous silhouette with no seams where branches meet the cell body.
+    a width that shrinks toward the tip. Forks follow Rall's rule — each
+    daughter is thinner than its parent — so the arbor thins from trunk to
+    spine-studded twig instead of staying a constant-width tube. Soma, dendrites
+    and axon are painted in two passes — a fattened outline, then a fill on top
+    — so the cell reads as one continuous silhouette with no seams where
+    branches meet the cell body. The axon leaves through a hillock, runs under
+    myelin internodes broken by nodes of Ranvier, and ends in a terminal arbor
+    of boutons, one of them synapsing onto a target dendrite.
     """
     a = t["magenta"]
     body = mix(t["sub"], a, 0.30)
+    sheath = mix(t["sub"], a, 0.15)
     cyc = 3.0
-    rng = random.Random(9)
-    sx0, sy0 = 162, 250
+    rng = random.Random(7)
+    sx0, sy0 = 166, 248
     o = head(96, "NEURON.SPIKE", "action potential", a, t)
 
-    shapes, tips = [], []
+    shapes, tips, spines, boutons = [], [], [], []
 
-    def ribbon(pts, w0, w1):
+    def ribbon(pts, w0, w1, prof=None):
+        """Offset a centreline both ways by a width that tapers toward the tip.
+
+        The default profile is concave — dendrites lose most of their calibre in
+        the first third of a segment, the way a real one leaves the soma.
+        """
         n, left, right = len(pts), [], []
         for i, (x, y) in enumerate(pts):
             if i == 0:
@@ -478,100 +489,199 @@ def scene_neuron(t):
                 dx, dy = pts[i + 1][0] - pts[i - 1][0], pts[i + 1][1] - pts[i - 1][1]
             L = math.hypot(dx, dy) or 1.0
             nx, ny = -dy / L, dx / L
-            w = (w0 + (w1 - w0) * (i / (n - 1))) / 2
+            u = i / (n - 1)
+            w = (prof(u) if prof else w1 + (w0 - w1) * (1 - u) ** 1.6) / 2
             left.append((round(x + nx * w, 1), round(y + ny * w, 1)))
             right.append((round(x - nx * w, 1), round(y - ny * w, 1)))
         return left + right[::-1]
 
-    def grow(x, y, ang, ln, w0, w1, depth, chain):
+    def bez(p0, p1, p2, p3, n):
+        out = []
+        for i in range(n + 1):
+            u = i / n
+            m = 1 - u
+            out.append((round(m*m*m*p0[0] + 3*m*m*u*p1[0]
+                              + 3*m*u*u*p2[0] + u*u*u*p3[0], 1),
+                        round(m*m*m*p0[1] + 3*m*m*u*p1[1]
+                              + 3*m*u*u*p2[1] + u*u*u*p3[1], 1)))
+        return out
+
+    def grow(x, y, ang, ln, w0, depth, chain, order, bias):
+        """One dendritic segment, then two thinner daughters at a fork."""
+        n = 6
+        bend = rng.uniform(-0.25, 0.25) + bias   # each segment holds one curve
         pts, cx, cy, aa = [(round(x, 1), round(y, 1))], x, y, ang
-        for _ in range(5):
-            aa += rng.uniform(-0.17, 0.17)
-            cx += math.cos(aa) * ln / 5
-            cy += math.sin(aa) * ln / 5
+        for _ in range(n):
+            aa += bend / n + rng.uniform(-0.04, 0.04)
+            if not (72 < cx < 272 and 134 < cy < 376):
+                back = math.atan2(sy0 - cy, sx0 - cx)
+                aa += 0.15 * ((back - aa + math.pi) % 6.28319 - math.pi)
+            cx += math.cos(aa) * ln / n
+            cy += math.sin(aa) * ln / n
             pts.append((round(cx, 1), round(cy, 1)))
+        w1 = max(w0 * (0.54 if depth else 0.22), 0.9)
         shapes.append(ribbon(pts, w0, w1))
         chain = chain + pts[1:]
+
+        if order >= 2:                           # spines stud the thin twigs
+            for i in range(2, n, 2):
+                if rng.random() < 0.32:
+                    continue
+                px, py = pts[i]
+                dx, dy = pts[i + 1][0] - px, pts[i + 1][1] - py
+                L = math.hypot(dx, dy) or 1.0
+                ux, uy = dx / L, dy / L
+                s = 1 if rng.random() < 0.5 else -1
+                vx, vy = -uy * s + ux * 0.45, ux * s + uy * 0.45
+                m = (math.hypot(vx, vy) or 1.0) / rng.uniform(2.9, 4.3)
+                spines.append((round(px, 1), round(py, 1),
+                               round(px + vx / m, 1), round(py + vy / m, 1)))
+
         if depth == 0:
             tips.append(chain)
             return
-        for k in (-1, 1):
-            grow(cx, cy, aa + k * rng.uniform(0.36, 0.62),
-                 ln * rng.uniform(0.58, 0.74), w1, w1 * 0.52, depth - 1, chain)
+        s = 1 if rng.random() < 0.5 else -1      # one daughter keeps the course
+        for wf, da in ((0.88, s * rng.uniform(0.16, 0.32)),
+                       (0.72, -s * rng.uniform(0.34, 0.56))):
+            grow(cx, cy, aa + da, ln * rng.uniform(0.62, 0.78),
+                 max(w1 * wf, 1.1), depth - 1, chain, order + 1,
+                 0.16 if da > 0 else -0.16)      # daughters keep diverging
 
-    for ang in (1.55, 1.98, 2.42, 2.90, 3.42, 3.98, 5.42):
-        bx, by = sx0 + math.cos(ang) * 8, sy0 + math.sin(ang) * 8
-        grow(bx, by, ang, 30, 15, 7, 2, [(round(bx, 1), round(by, 1))])
+    # primaries fan round the whole soma except the wedge the axon leaves by
+    for ang, ln, w, dep in ((1.58, 30, 13.0, 3), (2.20, 42, 16.0, 3),
+                            (2.86, 35, 15.0, 3), (3.55, 44, 16.5, 3),
+                            (4.12, 30, 13.5, 3), (4.85, 26, 12.0, 2),
+                            (5.55, 22, 11.0, 2)):
+        bx = sx0 + math.cos(ang) * 13
+        by = sy0 + math.sin(ang) * 11
+        grow(bx, by, ang, ln, w, dep, [(round(bx, 1), round(by, 1))], 0,
+             rng.uniform(-0.28, 0.28))
 
     soma = []
-    for i in range(56):
-        th = i / 56 * 6.28319
-        rr = 3.4 * math.sin(3 * th + 0.6) + 2.2 * math.sin(5 * th + 1.9)
-        soma.append((round(sx0 + math.cos(th) * (30 + rr), 1),
-                     round(sy0 + math.sin(th) * (27 + rr), 1)))
+    for i in range(72):
+        th = i / 72 * 6.28319
+        rr = 2.6 * math.sin(3 * th + 0.6) + 1.7 * math.sin(5 * th + 1.9)
+        soma.append((round(sx0 + math.cos(th) * (27 + rr), 1),
+                     round(sy0 + math.sin(th) * (23 + rr), 1)))
     shapes.append(soma)
 
-    guide = [(sx0 + 10, sy0 + 6), (214, 268), (254, 284), (296, 298),
-             (338, 310), (378, 318), (410, 322)]
-    shapes.append(ribbon(guide, 14, 5))
+    axon = bez((sx0 + 12, sy0 + 9), (210, 292), (290, 296), (366, 330), 44)
+    shapes.append(ribbon(axon[:12], 16, 5.4))            # hillock + initial seg
+    shapes.append(ribbon(axon[10:], 5.4, 4.4))           # constant-calibre axon
 
-    boutons = []
-    for ang, ln in ((-0.62, 30), (-0.24, 34), (0.2, 32), (0.62, 26)):
-        mid = (round(410 + math.cos(ang) * ln * 0.55, 1),
-               round(322 + math.sin(ang) * ln * 0.55, 1))
-        ex, ey = round(410 + math.cos(ang) * ln, 1), round(322 + math.sin(ang) * ln, 1)
-        shapes.append(ribbon([(410, 322), mid, (ex, ey)], 6, 3))
-        boutons.append((ex, ey))
+    def term(x, y, ang, ln, w, depth):
+        n = 4
+        bend = rng.uniform(-0.35, 0.35)
+        pts, cx, cy, aa = [(round(x, 1), round(y, 1))], x, y, ang
+        for _ in range(n):
+            aa += bend / n
+            cx += math.cos(aa) * ln / n
+            cy += math.sin(aa) * ln / n
+            pts.append((round(cx, 1), round(cy, 1)))
+        w1 = max(w * 0.76, 1.9)
+        shapes.append(ribbon(pts, w, w1))
+        if depth == 0:
+            boutons.append((round(cx, 1), round(cy, 1),
+                            round(rng.uniform(3.1, 4.3), 1)))
+            return
+        for k in (-1, 1):
+            term(cx, cy, aa + k * rng.uniform(0.28, 0.42),
+                 ln * rng.uniform(0.52, 0.66), w1, depth - 1)
 
-    for pg in shapes:
-        o.append(f'<polygon points="{poly(pg)}" fill="{a}" stroke="{a}" '
-                 f'stroke-width="3.4" stroke-linejoin="round"/>')
-    for bx, by in boutons:
-        o.append(f'<circle cx="{bx}" cy="{by}" r="6.4" fill="{a}"/>')
-    for pg in shapes:
-        o.append(f'<polygon points="{poly(pg)}" fill="{body}"/>')
-    for bx, by in boutons:
-        o.append(f'<circle cx="{bx}" cy="{by}" r="4.6" fill="{body}"/>')
+    for ang, ln in ((-1.02, 20), (-0.42, 24), (0.24, 25), (0.92, 19)):
+        term(366, 330, ang, ln, 4.6, 1)
 
-    o.append(f'<circle cx="{sx0 - 3}" cy="{sy0}" r="10.5" fill="{t["green"]}" '
+    # pass 1 — the silhouette, fattened by a stroke so branches weld together
+    o.append(f'<g fill="{a}" stroke="{a}" stroke-width="2.6" '
+             f'stroke-linejoin="round" stroke-linecap="round">')
+    o += [f'<polygon points="{poly(pg)}"/>' for pg in shapes]
+    o += [f'<circle cx="{bx}" cy="{by}" r="{round(r + 1.3, 1)}"/>'
+          for bx, by, r in boutons]
+    o += [f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke-width="2"/>'
+          for x1, y1, x2, y2 in spines]
+    o.append("</g>")
+    # pass 2 — the membrane fill, laid back over the seams
+    o.append(f'<g fill="{body}">')
+    o += [f'<polygon points="{poly(pg)}"/>' for pg in shapes]
+    o += [f'<circle cx="{bx}" cy="{by}" r="{r}"/>' for bx, by, r in boutons]
+    o.append("</g>")
+
+    # myelin sleeves sit on top of the axon; the gaps are nodes of Ranvier
+    internodes = [axon[i:i + 7] for i in range(11, len(axon) - 7, 8)]
+    for seg in internodes:
+        pg = ribbon(seg, 0, 0,
+                    prof=lambda u: 12.4 * (0.62 + 0.38 * math.sin(3.14159 * u) ** 0.5))
+        o.append(f'<polygon points="{poly(pg)}" fill="{sheath}" stroke="{a}" '
+                 f'stroke-width="2" stroke-linejoin="round"/>')
+
+    o.append(f'<circle cx="{sx0 - 4}" cy="{sy0 - 1}" r="11" fill="{t["green"]}" '
              f'opacity="0.9"/>')
-    o.append(f'<circle cx="{sx0 - 3}" cy="{sy0}" r="10.5" fill="none" '
+    o.append(f'<circle cx="{sx0 - 4}" cy="{sy0 - 1}" r="11" fill="none" '
              f'stroke="{t["green"]}" stroke-width="1.6"/>')
+    o.append(f'<circle cx="{sx0 - 6.5}" cy="{sy0 - 3}" r="4.1" '
+             f'fill="{mix(t["green"], t["value"], 0.45)}"/>')   # nucleolus
 
-    for i, ch in enumerate(tips[::2]):
+    # the target cell this neuron talks to — a dendrite across the synaptic cleft
+    tgt = max(boutons, key=lambda b: b[0])
+    px, py = round(tgt[0] + tgt[2] + 9, 1), tgt[1]
+    post = bez((px + 5, py - 31), (px - 5, py - 11),
+               (px - 5, py + 11), (px + 5, py + 31), 14)
+    o.append(f'<polygon points="{poly(ribbon(post, 0, 0, prof=lambda u: 11 * (0.5 + 0.5 * math.sin(3.14159 * u))))}" '
+             f'fill="{t["dim"]}" opacity="0.45"/>')
+
+    for i, ch in enumerate(tips[::4]):
         o.append(travel(list(reversed(ch)), a, cyc, round(i * 0.05, 2),
-                        sw=2.8, dash=12))
+                        sw=2.4, dash=11))
     o.append(f'<polygon points="{poly(soma)}" fill="{a}" opacity="0">'
              f'<animate attributeName="opacity" values="0;0.5;0" '
              f'keyTimes="0;0.44;0.62" dur="{cyc}s" repeatCount="indefinite"/></polygon>')
-    o.append(f'<circle cx="{sx0 - 3}" cy="{sy0}" r="10.5" fill="{t["value"]}" '
+    o.append(f'<circle cx="{sx0 - 4}" cy="{sy0 - 1}" r="11" fill="{t["value"]}" '
              f'opacity="0"><animate attributeName="opacity" values="0;0.55;0" '
              f'keyTimes="0;0.45;0.63" dur="{cyc}s" repeatCount="indefinite"/></circle>')
-    o.append(travel(guide, a, cyc, round(cyc * 0.46, 2), sw=4, dash=22))
+    o.append(travel(axon, a, cyc, round(cyc * 0.46, 2), sw=4, dash=22))
 
-    for i, (bx, by) in enumerate(boutons):
-        o.append(f'<circle cx="{bx}" cy="{by}" r="6.4" fill="{a}" opacity="0">'
-                 f'<animate attributeName="opacity" values="0;1;0" '
+    for i, (bx, by, r) in enumerate(boutons):
+        o.append(f'<circle cx="{bx}" cy="{by}" r="{round(r + 1.3, 1)}" fill="{a}" '
+                 f'opacity="0"><animate attributeName="opacity" values="0;1;0" '
                  f'keyTimes="0;0.9;1" dur="{cyc}s" begin="{round(i * 0.04, 2)}s" '
                  f'repeatCount="indefinite"/></circle>')
 
-    o.append(f'<circle cx="428" cy="336" r="17" fill="none" stroke="{t["cyan"]}" '
-             f'stroke-width="1.3" stroke-dasharray="4 4" opacity="0.35">'
-             f'<animate attributeName="opacity" values="0.35;0.95;0.35" '
-             f'dur="{cyc}s" begin="{round(cyc * 0.88, 2)}s" '
-             f'repeatCount="indefinite"/></circle>')
+    o.append(f'<circle cx="{round(tgt[0] + 4, 1)}" cy="{tgt[1]}" r="13" fill="none" '
+             f'stroke="{t["cyan"]}" stroke-width="1.3" stroke-dasharray="4 4" '
+             f'opacity="0.35"><animate attributeName="opacity" '
+             f'values="0.35;0.95;0.35" dur="{cyc}s" '
+             f'begin="{round(cyc * 0.88, 2)}s" repeatCount="indefinite"/></circle>')
 
+    # transmitter crossing the cleft once the spike reaches the bouton
+    for k in range(3):
+        vx, vy = round(tgt[0] + tgt[2] + 1.5, 1), round(tgt[1] + (k - 1) * 5.5, 1)
+        b = round(k * 0.05, 2)
+        o.append(f'<circle cx="{vx}" cy="{vy}" r="1.7" fill="{t["cyan"]}" '
+                 f'opacity="0"><animate attributeName="opacity" '
+                 f'values="0;0;0.95;0" keyTimes="0;0.86;0.93;1" dur="{cyc}s" '
+                 f'begin="{b}s" repeatCount="indefinite"/>'
+                 f'<animateTransform attributeName="transform" type="translate" '
+                 f'values="0,0;0,0;5,0" keyTimes="0;0.86;1" dur="{cyc}s" '
+                 f'begin="{b}s" repeatCount="indefinite"/></circle>')
+
+    node, sleeve = axon[18], axon[30]            # a node of Ranvier, an internode
+    top = min(boutons, key=lambda b: b[1])
     for lx, ly, anchor, label, tx, ty in (
-        (60, 150, "start", "dendrites", 96, 186),
-        (196, 136, "start", "soma", 176, 220),
-        (60, 348, "start", "nucleus", 150, 258),
-        (300, 252, "middle", "axon", 300, 290),
-        (IX1, 186, "end", "axon terminals", 420, 300),
-        (IX1, 384, "end", "synapse", 436, 350),
+        (60, 142, "start", "dendrites", 118, 186),
+        (200, 128, "start", "soma", 182, 224),
+        (60, 372, "start", "nucleus", 156, 254),
+        (236, 246, "middle", "axon", node[0], round(node[1] - 6, 1)),
+        (IX1, 172, "end", "myelin sheath", sleeve[0], round(sleeve[1] - 7, 1)),
+        (IX1, 252, "end", "axon terminals", round(top[0] - 4, 1),
+         round(top[1] - 6, 1)),
+        (IX1, 392, "end", "synapse", round(px + 2, 1), round(py + 13, 1)),
     ):
         o.append(text(lx, ly, label, t["dim"], size=9.5, anchor=anchor))
         hx = lx + (18 if anchor == "start" else -18 if anchor == "end" else 0)
-        o.append(line(hx, ly + 5, tx, ty, t["dim"], 0.9, op=0.55))
+        hy = ly + 5 if ty > ly else ly - 13      # leave from the near edge
+        o.append(line(hx, hy, tx, ty, t["dim"], 0.9, op=0.55))
+        o.append(f'<circle cx="{tx}" cy="{ty}" r="1.8" fill="{t["dim"]}" '
+                 f'opacity="0.7"/>')
 
     o += head(420, "SPIKE.TRAIN", "28 ms window", a, t)
     base, x = 542, IX0 + 4
